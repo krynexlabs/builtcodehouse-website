@@ -129,7 +129,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   letterSpacing: '-0.035em',
                   color: 'var(--text-primary)',
                   textTransform: 'uppercase',
-                  marginBottom: '28px',
+                  marginBottom: '20px',
                   maxWidth: '780px',
                 }}
               >
@@ -142,10 +142,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <p
                 style={{
                   fontSize: 'var(--text-body)',
-                  lineHeight: 1.65,
+                  lineHeight: 1.6,
                   color: 'var(--text-secondary)',
                   maxWidth: '580px',
-                  marginBottom: '40px',
+                  marginBottom: '28px',
                   fontWeight: 400,
                 }}
               >

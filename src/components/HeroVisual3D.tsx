@@ -333,7 +333,7 @@ export const HeroVisual3D: React.FC = () => {
             letterSpacing: '0.1em',
           }}
         >
-          COORD: 42° 21' N / 71° 03' W
+          NODE: DISTRIBUTED RUNTIME
         </span>
       </div>
 

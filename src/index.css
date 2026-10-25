@@ -29,7 +29,7 @@
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  --text-hero: clamp(48px, 5.8vw, 88px);
+  --text-hero: clamp(38px, 4.2vw, 68px);
   --text-display: clamp(36px, 4.2vw, 56px);
   --text-h1: clamp(30px, 3.4vw, 48px);
   --text-h2: clamp(24px, 2.6vw, 36px);
@@ -346,8 +346,15 @@ button {
   }
 }
 
-/* Hide custom cursor on touch/mobile devices */
-@media (pointer: coarse), (max-width: 1023px) {
+/* Hide custom cursor on touch/mobile devices or when hover is unavailable */
+@media (hover: none), (pointer: coarse), (max-width: 1023px) {
+  .architectural-cursor-dot,
+  .architectural-cursor-ring {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
   .architectural-cursor-dot,
   .architectural-cursor-ring {
     display: none !important;

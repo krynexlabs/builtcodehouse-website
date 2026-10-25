@@ -48,6 +48,7 @@ function App() {
   // Custom Cursor State
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
   const [trailingPos, setTrailingPos] = useState({ x: -100, y: -100 });
+  const [cursorVisible, setCursorVisible] = useState(false);
   const [isHoveringInteractive, setIsHoveringInteractive] = useState(false);
 
   // 1. Initial 1.2s Architectural Preloader Sequence
@@ -83,6 +84,7 @@ function App() {
       targetX = e.clientX;
       targetY = e.clientY;
       setCursorPos({ x: targetX, y: targetY });
+      setCursorVisible(true);
 
       // Detect hover on interactive elements
       const target = e.target as HTMLElement | null;
@@ -309,6 +311,7 @@ function App() {
         style={{
           left: `${cursorPos.x}px`,
           top: `${cursorPos.y}px`,
+          opacity: cursorVisible ? 1 : 0,
         }}
       />
       <div
@@ -316,6 +319,7 @@ function App() {
         style={{
           left: `${trailingPos.x}px`,
           top: `${trailingPos.y}px`,
+          opacity: cursorVisible ? 1 : 0,
         }}
       />
 

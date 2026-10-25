@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrandMonogram } from './BrandMonogram';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface NavigationProps {
   onStartProject?: () => void;
@@ -22,6 +22,15 @@ export const Navigation: React.FC<NavigationProps> = ({ onStartProject }) => {
     { label: 'FAQ', href: '#faq', id: 'faq' },
     { label: 'Insights', href: '#insights', id: 'insights' },
     { label: 'Contact', href: '#contact', id: 'contact' },
+  ];
+
+  const desktopNavItems = [
+    { label: 'Capabilities', href: '#capabilities', id: 'capabilities' },
+    { label: 'Process', href: '#process', id: 'process' },
+    { label: 'Work', href: '#work', id: 'work' },
+    { label: 'Engagement', href: '#engagement', id: 'engagement' },
+    { label: 'Insights', href: '#insights', id: 'insights' },
+    { label: 'About', href: '#about', id: 'about' },
   ];
 
   useEffect(() => {
@@ -181,7 +190,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onStartProject }) => {
             }}
             className="nav-desktop"
           >
-            {navItems.map((item) => {
+            {desktopNavItems.map((item) => {
               const isActive = activeSection === item.id;
 
               return (
@@ -262,7 +271,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onStartProject }) => {
               }}
             >
               <span>Start a Project</span>
-              <ArrowUpRight
+              <ArrowRight
                 size={14}
                 style={{
                   color: 'var(--brand-accent)',
@@ -356,7 +365,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onStartProject }) => {
               style={{ width: '100%', height: '48px', marginTop: '12px' }}
             >
               <span>Start a Project</span>
-              <ArrowUpRight size={15} />
+              <ArrowRight size={15} />
             </button>
           </div>
         )}
