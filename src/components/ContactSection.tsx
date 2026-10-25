@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, CheckCircle2, Copy, Check, Loader2, AlertTriangle } from 'lucide-react';
+import { validateInquiryForm, generateReferenceId } from '../lib/validation';
 
 /**
  * BUILTCODE HOUSE — Contact Section (Phase 7)
@@ -50,34 +51,26 @@ export const ContactSection: React.FC = () => {
     setErrorMessage(null);
     setFormError(null);
 
-    // Spam honeypot trap: bots fill this field, real humans don't see it
-    if (honeypot) {
-      console.warn('Bot submission suppressed.');
-      setIsSubmitted(true);
-      return;
-    }
+    const validation = validateInquiryForm({
+      fullName,
+      company,
+      email,
+      projectType,
+      projectGoals,
+      timeline,
+      projectDetails,
+      honeypot,
+    });
 
-    // Input Validation
-    if (fullName.trim().length < 2) {
-      setFormError('Please enter your full name (minimum 2 characters).');
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      setFormError('Please enter a valid corporate email address.');
-      return;
-    }
-    if (projectGoals.trim().length < 5) {
-      setFormError('Please describe your project goals.');
-      return;
-    }
-    if (projectDetails.trim().length < 15) {
-      setFormError('Please describe your requirements with at least 15 characters.');
+    if (!validation.isValid) {
+      const firstError = Object.values(validation.errors)[0];
+      setFormError(firstError);
       return;
     }
 
     setIsSubmitting(true);
 
-    const ref = `BCH-REQ-${Math.floor(1000 + Math.random() * 9000)}`;
+    const ref = generateReferenceId();
     const timestamp = new Date().toISOString();
 
     const payload = {

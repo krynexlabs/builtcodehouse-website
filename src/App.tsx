@@ -5,6 +5,7 @@ import { HeroSection } from './components/HeroSection';
 import { Footer } from './components/Footer';
 import { BrandMonogram } from './components/BrandMonogram';
 import { X, Send, Loader2 } from 'lucide-react';
+import { generateReferenceId } from './lib/validation';
 import './App.css';
 
 // React Code Splitting & Lazy Loading for Performance
@@ -164,7 +165,7 @@ function App() {
     e.preventDefault();
     setModalError(null);
     setModalSubmitting(true);
-    const ref = `BCH-REQ-${Math.floor(1000 + Math.random() * 9000)}`;
+    const ref = generateReferenceId();
     setModalRefId(ref);
 
     try {

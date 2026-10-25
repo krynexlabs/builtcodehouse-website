@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { SceneFallback } from './three/SceneFallback';
 
 /**
  * BUILTCODE HOUSE — 3D Centerpiece: "The Architectural Systems Monolith"
@@ -10,11 +11,29 @@ import * as THREE from 'three';
  * - Precision CAD wireframe alignment with calibrated datum calipers.
  * - Smooth inertia damping on mouse interaction.
  * - Optimized WebGL buffer disposal and resize lifecycle.
+ * - Fallback rendering when WebGL is unsupported or disabled.
  */
+const checkWebGLAvailable = (): boolean => {
+  if (typeof window === 'undefined') return true;
+  try {
+    const canvas = document.createElement('canvas');
+    return !!(
+      window.WebGLRenderingContext &&
+      (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+    );
+  } catch {
+    return false;
+  }
+};
+
+const isWebGLSupported = checkWebGLAvailable();
+
 export const HeroVisual3D: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!isWebGLSupported) return;
+
     const container = mountRef.current;
     if (!container) return;
 
@@ -31,11 +50,16 @@ export const HeroVisual3D: React.FC = () => {
     camera.lookAt(0, 0, 0);
 
     // Renderer with high performance & ACES Filmic mapping
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-      powerPreference: 'high-performance',
-    });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+        powerPreference: 'high-performance',
+      });
+    } catch {
+      return;
+    }
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -300,6 +324,10 @@ export const HeroVisual3D: React.FC = () => {
       }
     };
   }, []);
+
+  if (!isWebGLSupported) {
+    return <SceneFallback />;
+  }
 
   return (
     <div
