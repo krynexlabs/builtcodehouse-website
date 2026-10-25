@@ -12,7 +12,7 @@ import { Send, CheckCircle2, Copy, Check, Loader2, AlertTriangle } from 'lucide-
  *   - Right: Luxury multi-criteria project inquiry form.
  * - Options:
  *   - Project Types: SaaS Platform, AI Application, Enterprise Software, Cloud Infrastructure, Digital Product, Other
- *   - Budgets: $5k–10k, $10k–25k, $25k–50k, $50k–100k, $100k+
+ *   - Project Goals: Technical discovery & requirements specification
  *   - Timelines: ASAP, 1–3 Months, 3–6 Months, 6+ Months
  * - Strictly adhering to Brand System: #D6FF3F, #F5F5F5, #121212, #080808, and hairline borders.
  */
@@ -110,7 +110,7 @@ export const ContactSection: React.FC = () => {
           const existing = JSON.parse(localStorage.getItem('bch_inquiries') || '[]');
           existing.push(payload);
           localStorage.setItem('bch_inquiries', JSON.stringify(existing));
-        } catch (_) {}
+        } catch {}
       }
 
       setReferenceId(ref);

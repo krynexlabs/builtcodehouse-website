@@ -7,6 +7,8 @@ import { LegalModal } from './LegalModal';
  * BUILTCODE HOUSE — Enterprise Footer (Phase 10 Production Ready)
  */
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export const Footer: React.FC = () => {
   const [legalModal, setLegalModal] = useState<{ open: boolean; type: 'privacy' | 'terms' }>({
     open: false,
@@ -270,7 +272,7 @@ export const Footer: React.FC = () => {
                 letterSpacing: '0.08em',
               }}
             >
-              © {new Date().getFullYear()} BUILTCODE HOUSE. ALL RIGHTS RESERVED.
+              © {CURRENT_YEAR} BUILTCODE HOUSE. ALL RIGHTS RESERVED.
             </span>
             <span style={{ color: 'var(--border-subtle)', fontSize: '11px' }}>/</span>
             <button

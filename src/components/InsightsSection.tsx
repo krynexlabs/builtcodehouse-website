@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, type Variants } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-import { WhitepaperModal, type WhitepaperArticle, WHITEPAPER_ARTICLES } from './WhitepaperModal';
+import { WhitepaperModal } from './WhitepaperModal';
+import { WHITEPAPER_ARTICLES, type WhitepaperArticle } from '../data/whitepapers';
 
 /**
  * BUILTCODE HOUSE — Insights Section (Phase 6)

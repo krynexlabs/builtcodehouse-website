@@ -180,7 +180,7 @@ function App() {
         setFormSubmitted(false);
         setProjectModalOpen(false);
       }, 3000);
-    } catch (err: any) {
+    } catch {
       setModalError('Transmission failed. Please reach out to contact@builtcodehouse.com.');
     } finally {
       setModalSubmitting(false);
