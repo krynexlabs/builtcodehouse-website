@@ -48,13 +48,13 @@ export const BrandMonogram: React.FC<BrandMonogramProps> = ({
           width="7"
           height="36"
           rx="1"
-          fill="var(--text-primary)"
+          fill="#F5F5F5"
         />
 
         {/* Structural Cantilever Upper - Architectural Crossbeam */}
         <path
           d="M17 6H38C39.6569 6 41 7.34315 41 9V17C41 18.6569 39.6569 20 38 20H17V6Z"
-          fill="var(--text-primary)"
+          fill="#F5F5F5"
         />
 
         {/* Precision Negative Space Core Channel */}
@@ -64,13 +64,13 @@ export const BrandMonogram: React.FC<BrandMonogramProps> = ({
           width="10"
           height="4"
           rx="0.5"
-          fill="var(--bg-primary)"
+          fill="#080808"
         />
 
         {/* Structural Cantilever Lower - Foundation Stele */}
         <path
           d="M17 25H36C37.6569 25 39 26.3431 39 28V39C39 40.6569 37.6569 42 36 42H17V25Z"
-          fill="var(--text-primary)"
+          fill="#F5F5F5"
         />
 
         {/* Lower Core Negative Space Channel */}
@@ -80,16 +80,16 @@ export const BrandMonogram: React.FC<BrandMonogramProps> = ({
           width="9"
           height="5"
           rx="0.5"
-          fill="var(--bg-primary)"
+          fill="#080808"
         />
 
-        {/* Precision Laser Datum Node (Calibrated Brand Accent #0066FF) */}
+        {/* Precision Laser Datum Node (Calibrated Brand Accent) */}
         {showAccent && (
           <circle
             cx="40"
             cy="22.5"
-            r="2.2"
-            fill="var(--brand-accent)"
+            r="2"
+            fill="#D6FF3F"
           />
         )}
       </svg>

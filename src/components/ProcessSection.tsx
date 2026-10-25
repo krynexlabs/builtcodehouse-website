@@ -26,10 +26,10 @@ interface ProcessStep {
 const steps: ProcessStep[] = [
   {
     number: '01',
-    code: '01 — DISCOVER',
-    title: 'Discover',
+    code: 'PHASE_01 // REQ_SPEC',
+    title: 'DISCOVERY',
     description:
-      'Understand goals, users, technical constraints, opportunities, competitive landscape, and foundational business requirements.',
+      'Understand goals, users, constraints, opportunities, competition, and business requirements.',
     phaseTag: 'FOUNDATION MATRIX',
     telemetry: 'SPRINT 01 // INPUT VALIDATION',
     deliverables: [
@@ -42,10 +42,10 @@ const steps: ProcessStep[] = [
   },
   {
     number: '02',
-    code: '02 — DEFINE',
-    title: 'Define',
+    code: 'PHASE_02 // STRAT_DIR',
+    title: 'STRATEGY',
     description:
-      'Define roadmap, technical requirements, architecture direction, system constraints, priorities, and verified success metrics.',
+      'Define roadmap, product requirements, architecture direction, priorities, and success metrics.',
     phaseTag: 'PLANNING & ROADMAP',
     telemetry: 'SPRINT 02 // TRAJECTORY DEFINITION',
     deliverables: [
@@ -58,26 +58,26 @@ const steps: ProcessStep[] = [
   },
   {
     number: '03',
-    code: '03 — DESIGN',
-    title: 'Design',
+    code: 'PHASE_03 // SYS_ARCH',
+    title: 'ARCHITECTURE',
     description:
-      'Design scalable distributed systems, cloud infrastructure, data schemas, modular components, and intuitive user interfaces.',
+      'Design scalable systems, infrastructure, data models, integrations, and technical foundations.',
     phaseTag: 'STRUCTURAL BLUEPRINT',
     telemetry: 'SPRINT 03-04 // KERNEL DESIGN',
     deliverables: [
       'C4 Multi-Tier Component Topology',
       'Relational & Distributed Data Schemas',
       'Strict API Contracts (OpenAPI & gRPC)',
-      'High-Fidelity Interface System',
+      'Zero-Trust Security & Threat Model',
     ],
     schematicType: 'architecture',
   },
   {
     number: '04',
-    code: '04 — BUILD',
-    title: 'Build',
+    code: 'PHASE_04 // ENG_FAB',
+    title: 'BUILD',
     description:
-      'Develop modular software using modern engineering standards, rigorous type safety, continuous integration, and performance optimization.',
+      'Develop software using modern engineering standards, testing, security, and performance optimization.',
     phaseTag: 'SYSTEM FABRICATION',
     telemetry: 'SPRINT 05-10 // CONTINUOUS SPRINT',
     deliverables: [
@@ -90,33 +90,33 @@ const steps: ProcessStep[] = [
   },
   {
     number: '05',
-    code: '05 — VALIDATE',
-    title: 'Validate',
+    code: 'PHASE_05 // PROD_REL',
+    title: 'LAUNCH',
     description:
-      'Comprehensive automated QA, end-to-end integration tests, security audits, performance profiling, and stakeholder verification.',
-    phaseTag: 'VERIFICATION GATE',
-    telemetry: 'QA // CONFORMANCE AUDIT',
+      'Deploy with confidence using monitoring, observability, validation, and operational readiness.',
+    phaseTag: 'DEPLOYMENT ORCHESTRATION',
+    telemetry: 'RELEASE GATE // CUTOVER',
     deliverables: [
-      'Automated End-to-End Test Suite',
-      'Penetration Testing Clearance',
-      'Multi-Device Responsive Matrix',
-      'Accessibility (WCAG AA) Audit',
+      'Blue/Green Zero-Downtime Deployment',
+      'Distributed OpenTelemetry Tracing',
+      'Automated Rollback Safeguards',
+      'Penetration Testing Audit Clearance',
     ],
     schematicType: 'launch',
   },
   {
     number: '06',
-    code: '06 — DELIVER',
-    title: 'Deliver',
+    code: 'PHASE_06 // CONTINUOUS',
+    title: 'SCALE',
     description:
-      'Deploy with confidence using zero-downtime blue/green rollouts, distributed telemetry, monitoring safeguards, and operational handoff.',
-    phaseTag: 'PRODUCTION DEPLOYMENT',
-    telemetry: 'RELEASE GATE // CUTOVER',
+      'Continuously improve, optimize, automate, and expand product capabilities.',
+    phaseTag: 'EXPONENTIAL GROWTH',
+    telemetry: 'POST-LAUNCH // INFINITE LOOP',
     deliverables: [
-      'Zero-Downtime Blue/Green Release',
-      'Distributed OpenTelemetry Tracing',
-      'Automated Rollback Safeguards',
-      '100% Code Ownership & Documentation',
+      'Horizontal Pod Auto-Scaling Topology',
+      'Algorithmic Query & Cache Tuning',
+      'Continuous Chaos Resilience Testing',
+      'High-Velocity Iteration Pipeline',
     ],
     schematicType: 'scale',
   },
@@ -128,9 +128,9 @@ const ProcessSchematic: React.FC<{
   type: ProcessStep['schematicType'];
   isActive: boolean;
 }> = ({ type, isActive }) => {
-  const accent = '#0066FF';
-  const wire = isActive ? 'rgba(9, 9, 11, 0.35)' : 'rgba(9, 9, 11, 0.16)';
-  const dimWire = 'rgba(9, 9, 11, 0.08)';
+  const accent = '#D6FF3F';
+  const wire = isActive ? 'rgba(245, 245, 245, 0.45)' : 'rgba(245, 245, 245, 0.18)';
+  const dimWire = 'rgba(255, 255, 255, 0.08)';
 
   switch (type) {
     case 'discovery':

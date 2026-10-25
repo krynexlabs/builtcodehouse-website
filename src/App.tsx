@@ -1,4 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Navigation } from './components/Navigation';
 import { HeroSection } from './components/HeroSection';
 import { Footer } from './components/Footer';
@@ -36,6 +37,8 @@ const ContactSection = lazy(() =>
 );
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  const [loadProgress, setLoadProgress] = useState(0);
   const [projectModalOpen, setProjectModalOpen] = useState(false);
   const [modalSubmitting, setModalSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -47,6 +50,25 @@ function App() {
   const [trailingPos, setTrailingPos] = useState({ x: -100, y: -100 });
   const [cursorVisible, setCursorVisible] = useState(false);
   const [isHoveringInteractive, setIsHoveringInteractive] = useState(false);
+
+  // 1. Initial 1.2s Architectural Preloader Sequence
+  useEffect(() => {
+    const startTime = Date.now();
+    const duration = 1200; // 1.2s (< 2s maximum)
+
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(Math.round((elapsed / duration) * 100), 100);
+      setLoadProgress(progress);
+
+      if (progress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => setLoading(false), 200);
+      }
+    }, 25);
+
+    return () => clearInterval(interval);
+  }, []);
 
   // 2. Custom Architectural Cursor Tracking (Desktop Pointer Only)
   useEffect(() => {
@@ -167,7 +189,121 @@ function App() {
 
   return (
     <div className="app-wrapper">
+      {/* --- PRELOADER (ARCHITECTURAL LOADING SEQUENCE) --- */}
+      <AnimatePresence>
+        {loading && (
+          <motion.div
+            key="preloader"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              backgroundColor: '#080808',
+              zIndex: 99999,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '24px',
+            }}
+          >
+            {/* Monogram with subtle pulse */}
+            <div style={{ marginBottom: '28px' }}>
+              <BrandMonogram size={48} showAccent={true} />
+            </div>
 
+            {/* Brand Title */}
+            <span
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '13px',
+                fontWeight: 600,
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: '#F5F5F5',
+                marginBottom: '4px',
+              }}
+            >
+              BUILTCODE HOUSE
+            </span>
+
+            {/* Subtitle */}
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '10px',
+                color: 'var(--text-muted)',
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+                marginBottom: '24px',
+              }}
+            >
+              DIGITAL ENGINEERING COMPANY
+            </span>
+
+            {/* Progress Bar Track */}
+            <div
+              style={{
+                width: '180px',
+                height: '1px',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                position: 'relative',
+                overflow: 'hidden',
+                marginBottom: '16px',
+              }}
+            >
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  bottom: 0,
+                  width: `${loadProgress}%`,
+                  backgroundColor: 'var(--brand-accent)',
+                  boxShadow: '0 0 8px var(--brand-accent)',
+                  transition: 'width 25ms linear',
+                }}
+              />
+            </div>
+
+            {/* Telemetry Status */}
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '10px',
+                color: 'var(--brand-accent)',
+                letterSpacing: '0.12em',
+              }}
+            >
+              INITIALIZING RUNTIME // {loadProgress}%
+            </div>
+
+            {/* Quick Skip Control for Testing & Fast Ingestion */}
+            <button
+              onClick={() => setLoading(false)}
+              style={{
+                marginTop: '14px',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '9px',
+                color: 'var(--text-muted)',
+                letterSpacing: '0.14em',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                textTransform: 'uppercase',
+                opacity: 0.7,
+                transition: 'opacity var(--transition-fast)',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.7'; }}
+            >
+              [ SKIP INITIALIZATION ]
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* --- DESKTOP CUSTOM ARCHITECTURAL CURSOR --- */}
       <div

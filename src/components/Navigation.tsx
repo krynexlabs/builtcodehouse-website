@@ -12,14 +12,25 @@ export const Navigation: React.FC<NavigationProps> = ({ onStartProject }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-
-  const desktopNavItems = [
-    { label: 'Services', href: '#capabilities', id: 'capabilities' },
-    { label: 'Work', href: '#work', id: 'work' },
-    { label: 'Philosophy', href: '#about', id: 'about' },
+  const navItems = [
+    { label: 'Capabilities', href: '#capabilities', id: 'capabilities' },
+    { label: 'Why Us', href: '#trust', id: 'trust' },
     { label: 'Process', href: '#process', id: 'process' },
+    { label: 'Work', href: '#work', id: 'work' },
+    { label: 'Engagement', href: '#engagement', id: 'engagement' },
+    { label: 'About', href: '#about', id: 'about' },
+    { label: 'FAQ', href: '#faq', id: 'faq' },
     { label: 'Insights', href: '#insights', id: 'insights' },
     { label: 'Contact', href: '#contact', id: 'contact' },
+  ];
+
+  const desktopNavItems = [
+    { label: 'Capabilities', href: '#capabilities', id: 'capabilities' },
+    { label: 'Process', href: '#process', id: 'process' },
+    { label: 'Work', href: '#work', id: 'work' },
+    { label: 'Engagement', href: '#engagement', id: 'engagement' },
+    { label: 'Insights', href: '#insights', id: 'insights' },
+    { label: 'About', href: '#about', id: 'about' },
   ];
 
   useEffect(() => {
@@ -99,7 +110,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onStartProject }) => {
         right: 0,
         zIndex: 50,
         transition: 'background-color var(--transition-base), border-color var(--transition-base)',
-        backgroundColor: scrolled ? 'rgba(250, 250, 250, 0.92)' : 'rgba(250, 250, 250, 0.75)',
+        backgroundColor: scrolled ? 'rgba(8, 8, 8, 0.92)' : 'rgba(8, 8, 8, 0.45)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
         borderBottom: `1px solid ${scrolled ? 'var(--border-subtle)' : 'transparent'}`,
@@ -234,34 +245,36 @@ export const Navigation: React.FC<NavigationProps> = ({ onStartProject }) => {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
-                padding: '0 18px',
-                height: '38px',
-                backgroundColor: 'var(--text-primary)',
-                color: '#FFFFFF',
-                border: '1px solid transparent',
-                borderRadius: '9999px',
+                padding: '0 20px',
+                height: '42px',
+                backgroundColor: 'var(--surface-tertiary)',
+                color: 'var(--text-primary)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: '6px',
                 fontSize: '13px',
                 fontWeight: 500,
                 letterSpacing: '-0.01em',
                 cursor: 'pointer',
                 transition: 'all var(--transition-fast)',
                 position: 'relative',
-                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.08)',
+                overflow: 'hidden',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.opacity = '0.9';
-                e.currentTarget.style.transform = 'translateY(-1px)';
+                e.currentTarget.style.borderColor = 'var(--border-hover)';
+                e.currentTarget.style.backgroundColor = 'var(--surface-elevated)';
+                e.currentTarget.style.boxShadow = '0 0 16px rgba(214, 255, 63, 0.08)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = '1';
-                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                e.currentTarget.style.backgroundColor = 'var(--surface-tertiary)';
+                e.currentTarget.style.boxShadow = 'none';
               }}
             >
               <span>Start a Project</span>
               <ArrowRight
-                size={13}
+                size={14}
                 style={{
-                  color: 'rgba(255, 255, 255, 0.85)',
+                  color: 'var(--brand-accent)',
                   transition: 'transform var(--transition-fast)',
                 }}
               />
@@ -276,15 +289,14 @@ export const Navigation: React.FC<NavigationProps> = ({ onStartProject }) => {
               aria-controls="mobile-nav-drawer"
               style={{
                 display: 'none',
-                width: '40px',
-                height: '40px',
+                width: '42px',
+                height: '42px',
                 alignItems: 'center',
                 justifyContent: 'center',
                 border: '1px solid var(--border-subtle)',
-                borderRadius: '8px',
+                borderRadius: '6px',
                 background: 'var(--surface-tertiary)',
                 color: 'var(--text-primary)',
-                cursor: 'pointer',
               }}
             >
               <div
@@ -321,24 +333,22 @@ export const Navigation: React.FC<NavigationProps> = ({ onStartProject }) => {
             style={{
               padding: '24px 0 32px 0',
               borderTop: '1px solid var(--border-subtle)',
-              backgroundColor: 'var(--bg-primary)',
               display: 'flex',
               flexDirection: 'column',
-              gap: '16px',
+              gap: '20px',
             }}
           >
-            {desktopNavItems.map((item) => (
+            {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
                 style={{
                   fontFamily: 'var(--font-sans)',
-                  fontSize: '16px',
-                  fontWeight: 500,
-                  color: 'var(--text-primary)',
-                  padding: '6px 0',
-                  textDecoration: 'none',
+                  fontSize: '18px',
+                  fontWeight: 400,
+                  color: 'var(--text-secondary)',
+                  padding: '4px 0',
                 }}
               >
                 {item.label}
@@ -352,7 +362,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onStartProject }) => {
                 if (onStartProject) onStartProject();
               }}
               className="btn-primary"
-              style={{ width: '100%', height: '46px', marginTop: '12px' }}
+              style={{ width: '100%', height: '48px', marginTop: '12px' }}
             >
               <span>Start a Project</span>
               <ArrowRight size={15} />

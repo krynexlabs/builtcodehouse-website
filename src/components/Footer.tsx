@@ -16,10 +16,13 @@ export const Footer: React.FC = () => {
   });
 
   const navLinks = [
-    { label: 'Services', href: '#capabilities' },
-    { label: 'Work', href: '#work' },
-    { label: 'Philosophy', href: '#about' },
+    { label: 'Capabilities', href: '#capabilities' },
+    { label: 'Why Us', href: '#trust' },
     { label: 'Process', href: '#process' },
+    { label: 'Work', href: '#work' },
+    { label: 'Engagement', href: '#engagement' },
+    { label: 'About', href: '#about' },
+    { label: 'FAQ', href: '#faq' },
     { label: 'Insights', href: '#insights' },
     { label: 'Contact', href: '#contact' },
   ];
