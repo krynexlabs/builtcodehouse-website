@@ -103,7 +103,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     color: 'var(--text-secondary)',
                   }}
                 >
-                  DIGITAL ENGINEERING COMPANY
+                  DIGITAL ENGINEERING STUDIO
                 </span>
                 <span style={{ color: 'var(--border-hover)', fontSize: '11px' }}>/</span>
                 <span
@@ -124,16 +124,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <h1
                 style={{
                   fontSize: 'var(--text-hero)',
-                  lineHeight: 1.04,
+                  lineHeight: 1.08,
                   fontWeight: 600,
                   letterSpacing: '-0.035em',
                   color: 'var(--text-primary)',
-                  textTransform: 'uppercase',
                   marginBottom: '20px',
                   maxWidth: '780px',
                 }}
               >
-                ENGINEERING DIGITAL PRODUCTS THAT DRIVE REAL BUSINESS VALUE.
+                From Complex Ideas to Exceptional Digital Products.
               </h1>
             </motion.div>
 
@@ -149,9 +148,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   fontWeight: 400,
                 }}
               >
-                We architect and build production SaaS platforms, custom web applications,
-                and practical AI systems for ambitious startups, growing businesses, and
-                enterprise teams. Fixed scopes, direct senior engineering, and 100% code ownership.
+                BuiltCodeHouse helps businesses and founders turn ideas into thoughtfully engineered websites, applications, and software products. Fixed scopes, direct senior engineering, and 100% code ownership.
               </p>
             </motion.div>
 
@@ -179,7 +176,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 className="btn-secondary"
                 id="hero-cta-view-work"
               >
-                <span>Explore Selected Work</span>
+                <span>Explore Our Work</span>
                 <ArrowUpRight size={16} style={{ color: 'var(--text-muted)' }} />
               </button>
             </motion.div>
@@ -291,6 +288,46 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   Full Codebase Ownership
                 </span>
               </div>
+            </motion.div>
+
+            {/* 6. Subtle Downward Scroll Indicator */}
+            <motion.div
+              variants={itemVariants}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '12px',
+                marginTop: '36px',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '11px',
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+                color: 'var(--text-muted)',
+              }}
+            >
+              <div
+                style={{
+                  width: '14px',
+                  height: '24px',
+                  borderRadius: '7px',
+                  border: '1px solid var(--border-hover)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  paddingTop: '3px',
+                }}
+              >
+                <motion.div
+                  animate={{ y: [0, 8, 0], opacity: [0.3, 1, 0.3] }}
+                  transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
+                  style={{
+                    width: '2px',
+                    height: '5px',
+                    backgroundColor: 'var(--brand-accent)',
+                    borderRadius: '1px',
+                  }}
+                />
+              </div>
+              <span>SCROLL TO EXPLORE ARCHITECTURE</span>
             </motion.div>
           </div>
 
