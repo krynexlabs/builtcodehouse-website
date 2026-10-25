@@ -751,7 +751,10 @@ export const ContactSection: React.FC = () => {
                       required
                       placeholder="Alex Vance"
                       value={fullName}
-                      onChange={(e) => setFullName(e.target.value)}
+                      onChange={(e) => {
+                        setFullName(e.target.value);
+                        if (formError) setFormError(null);
+                      }}
                       className="luxury-input"
                     />
                   </div>
@@ -777,7 +780,10 @@ export const ContactSection: React.FC = () => {
                       required
                       placeholder="Horizon Dynamics Inc."
                       value={company}
-                      onChange={(e) => setCompany(e.target.value)}
+                      onChange={(e) => {
+                        setCompany(e.target.value);
+                        if (formError) setFormError(null);
+                      }}
                       className="luxury-input"
                     />
                   </div>
@@ -805,7 +811,10 @@ export const ContactSection: React.FC = () => {
                     required
                     placeholder="alex@horizondynamics.com"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (formError) setFormError(null);
+                    }}
                     className="luxury-input"
                   />
                 </div>
@@ -882,7 +891,10 @@ export const ContactSection: React.FC = () => {
                     required
                     placeholder="Tell us what you want to achieve and how success will be measured."
                     value={projectGoals}
-                    onChange={(e) => setProjectGoals(e.target.value)}
+                    onChange={(e) => {
+                      setProjectGoals(e.target.value);
+                      if (formError) setFormError(null);
+                    }}
                     className="luxury-textarea"
                     style={{ minHeight: '84px' }}
                   />
@@ -959,11 +971,37 @@ export const ContactSection: React.FC = () => {
                     required
                     placeholder="Describe your technical vision, architecture constraints, or expected system scale..."
                     value={projectDetails}
-                    onChange={(e) => setProjectDetails(e.target.value)}
+                    onChange={(e) => {
+                      setProjectDetails(e.target.value);
+                      if (formError) setFormError(null);
+                    }}
                     className="luxury-textarea"
                     style={{ minHeight: '120px' }}
                   />
                 </div>
+
+                {/* Form Error / Transmission Error Alert */}
+                {(formError || errorMessage) && (
+                  <div
+                    role="alert"
+                    aria-live="assertive"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      padding: '12px 16px',
+                      backgroundColor: 'rgba(255, 77, 77, 0.08)',
+                      border: '1px solid #FF4D4D',
+                      borderRadius: '4px',
+                      color: '#FF8080',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '12px',
+                    }}
+                  >
+                    <AlertTriangle size={16} style={{ flexShrink: 0, color: '#FF4D4D' }} />
+                    <span>{formError || errorMessage}</span>
+                  </div>
+                )}
 
                 {/* 7. Submit Button */}
                 <button

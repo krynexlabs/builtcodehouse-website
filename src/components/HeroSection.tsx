@@ -442,6 +442,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             margin-top: 32px;
           }
         }
+        @media (max-width: 640px) {
+          .hero-visual-col {
+            height: 360px !important;
+            margin-top: 24px;
+          }
+        }
       `}</style>
     </section>
   );

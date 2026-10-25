@@ -53,7 +53,7 @@ export const WhitepaperModal: React.FC<WhitepaperModalProps> = ({ article, isOpe
           maxWidth: '840px',
           maxHeight: '90vh',
           overflowY: 'auto',
-          padding: '48px 40px',
+          padding: 'clamp(24px, 5vw, 48px) clamp(18px, 4vw, 40px)',
           backgroundColor: 'var(--bg-secondary)',
           border: '1px solid var(--border-hover)',
           borderRadius: '8px',

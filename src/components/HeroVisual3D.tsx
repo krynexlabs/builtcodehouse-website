@@ -208,19 +208,43 @@ export const HeroVisual3D: React.FC = () => {
       mouseY = y;
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        const rect = container.getBoundingClientRect();
+        mouseX = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+        mouseY = -(((touch.clientY - rect.top) / rect.height) * 2 - 1);
+      }
+    };
 
-    // Handle Resize
-    const handleResize = () => {
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+
+    // Handle Responsive Dynamic Camera Framing & Aspect Ratio
+    const updateCameraDistance = () => {
       if (!container) return;
       width = container.clientWidth;
       height = container.clientHeight;
-      camera.aspect = width / height;
+      if (height === 0) return;
+      const aspect = width / height;
+      camera.aspect = aspect;
+
+      // On mobile / narrow columns (aspect < 1.15), gently adjust camera distance to prevent clipping
+      if (aspect < 1.15) {
+        const zoomFactor = Math.min(Math.max(1.15 / aspect, 1.0), 1.55);
+        camera.position.set(24 * zoomFactor, 18 * zoomFactor, 28 * zoomFactor);
+      } else {
+        camera.position.set(24, 18, 28);
+      }
+
+      camera.lookAt(0, 0, 0);
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
     };
 
-    window.addEventListener('resize', handleResize);
+    // Initial camera calibration
+    updateCameraDistance();
+    window.addEventListener('resize', updateCameraDistance);
 
     // Visibility Optimization with IntersectionObserver
     let isVisible = true;
@@ -232,9 +256,9 @@ export const HeroVisual3D: React.FC = () => {
     );
     observer.observe(container);
 
-    // Animation Loop
+    // Animation Loop with High-Precision Performance Timer (Zero Three.js Deprecation Warnings)
     let animationFrameId: number;
-    let clock = new THREE.Clock();
+    const startTime = performance.now();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
@@ -242,7 +266,7 @@ export const HeroVisual3D: React.FC = () => {
       // Freeze WebGL GPU execution when scrolled out of view
       if (!isVisible) return;
 
-      const elapsedTime = clock.getElapsedTime();
+      const elapsedTime = (performance.now() - startTime) * 0.001;
 
       // Continuous subtle structural revolution with smooth mouse parallax
       targetRotationY = masterGroup.rotation.y + 0.0016 + mouseX * 0.015;
@@ -263,7 +287,8 @@ export const HeroVisual3D: React.FC = () => {
     return () => {
       observer.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('resize', updateCameraDistance);
       cancelAnimationFrame(animationFrameId);
 
       geometries.forEach((g) => g.dispose());
@@ -282,7 +307,6 @@ export const HeroVisual3D: React.FC = () => {
         position: 'relative',
         width: '100%',
         height: '100%',
-        minHeight: '540px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

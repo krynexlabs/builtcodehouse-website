@@ -45,6 +45,17 @@
   padding: 40px;
   box-shadow: var(--shadow-elevated);
   position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@media (max-width: 640px) {
+  .modal-overlay {
+    padding: 16px;
+  }
+  .modal-content {
+    padding: 28px 18px;
+  }
 }
 
 /* Luxury Input */

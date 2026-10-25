@@ -46,7 +46,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, isOpen, onClose })
           maxWidth: '720px',
           maxHeight: '85vh',
           overflowY: 'auto',
-          padding: '44px 36px',
+          padding: 'clamp(24px, 5vw, 44px) clamp(18px, 4vw, 36px)',
         }}
       >
         {/* Close Button */}
