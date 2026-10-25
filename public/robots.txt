@@ -1,0 +1,6 @@
+# BUILTCODE HOUSE — Production Robots Policy
+User-agent: *
+Allow: /
+
+# Canonical Sitemap
+Sitemap: https://builtcodehouse.com/sitemap.xml

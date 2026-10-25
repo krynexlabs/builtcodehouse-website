@@ -1,0 +1,18 @@
+{
+  "name": "BUILTCODE HOUSE — Digital Engineering Company",
+  "short_name": "BUILTCODE",
+  "description": "Architecting and engineering high-scale SaaS platforms, AI systems, and enterprise infrastructure.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#080808",
+  "background_color": "#080808",
+  "display": "standalone",
+  "start_url": "/",
+  "orientation": "portrait"
+}

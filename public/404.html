@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 // ROUTE NOT FOUND — BUILTCODE HOUSE</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="theme-color" content="#080808" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      :root {
+        --bg-primary: #080808;
+        --bg-secondary: #121212;
+        --text-primary: #F5F5F5;
+        --text-secondary: #A8ADB2;
+        --text-muted: #8A9098;
+        --brand-accent: #D6FF3F;
+        --border-subtle: rgba(255, 255, 255, 0.08);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .grid-bg {
+        position: fixed;
+        inset: 0;
+        background-size: 64px 64px;
+        background-image: 
+          linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        pointer-events: none;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 4px;
+        background-color: #1c1c1c;
+        border: 1px solid var(--border-subtle);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--brand-accent);
+        margin-bottom: 24px;
+      }
+      .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--brand-accent);
+        box-shadow: 0 0 8px var(--brand-accent);
+      }
+      h1 {
+        font-size: clamp(36px, 6vw, 64px);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+      }
+      p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--text-secondary);
+        max-width: 480px;
+        margin-bottom: 32px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        height: 48px;
+        padding: 0 28px;
+        background-color: var(--text-primary);
+        color: var(--bg-primary);
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: all 200ms ease;
+      }
+      .btn:hover {
+        background-color: var(--brand-accent);
+        transform: translateY(-1px);
+        box-shadow: 0 0 20px rgba(214, 255, 63, 0.2);
+      }
+      .countdown {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 11px;
+        color: var(--text-muted);
+        letter-spacing: 0.1em;
+        margin-top: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-bg"></div>
+    <div style="position: relative; z-index: 10;">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        <span>ERROR 404 // ROUTE ANOMALY</span>
+      </div>
+      <h1>UNRESOLVED ARCHITECTURE</h1>
+      <p>The system node or pathway requested does not exist within the BUILTCODE HOUSE cluster runtime.</p>
+      <a href="/" class="btn">Return to Primary Node</a>
+      <div class="countdown" id="countdown-text">Auto-routing in 6s...</div>
+    </div>
+    <script>
+      let seconds = 6;
+      const el = document.getElementById('countdown-text');
+      const timer = setInterval(() => {
+        seconds--;
+        if (el) el.textContent = 'Auto-routing in ' + seconds + 's...';
+        if (seconds <= 0) {
+          clearInterval(timer);
+          window.location.href = '/';
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
