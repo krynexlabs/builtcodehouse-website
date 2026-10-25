@@ -22,57 +22,57 @@ interface ServiceItem {
 
 const services: ServiceItem[] = [
   {
-    id: 'product-engineering',
+    id: 'website-engineering',
     number: '01',
-    title: 'Custom Software That Drives Commercial Value',
+    title: 'Website Engineering',
     description:
-      'End-to-end web applications and internal tools engineered to ship fast, scale reliably, and generate measurable business value.',
-    technicalMeta: 'RAPID DELIVERY // PRODUCTION RESILIENCE',
+      'High-performance marketing websites, editorial platforms, and design systems built with sub-second load times, bespoke interactions, and responsive precision.',
+    technicalMeta: 'PERFORMANCE FIRST // RESPONSIVE ARCHITECTURE',
     schematicType: 'product',
   },
   {
-    id: 'ai-systems',
+    id: 'custom-software',
     number: '02',
-    title: 'Practical AI & Automated Workflows',
+    title: 'Custom Software Development',
     description:
-      'Custom LLM integrations, retrieval pipelines, and autonomous workflows that eliminate repetitive operational bottlenecks.',
-    technicalMeta: 'CUSTOM LLM PIPELINES // AUTOMATED EXECUTION',
+      'End-to-end web applications and internal tools engineered to ship fast, eliminate operational bottlenecks, and generate measurable commercial value.',
+    technicalMeta: 'DISTRIBUTED ARCHITECTURE // TYPESAFE STACK',
     schematicType: 'ai',
   },
   {
-    id: 'saas-platforms',
+    id: 'saas-products',
     number: '03',
-    title: 'SaaS Platforms Built For Long-Term Scale',
+    title: 'SaaS Product Development',
     description:
-      'Subscription platforms engineered with multi-tenant security, automated billing, and user management ready for enterprise sign-ups.',
-    technicalMeta: 'SUBSCRIPTION ARCHITECTURE // HIGH CONVERSION',
+      'Subscription platforms engineered with multi-tenant data isolation, automated billing, role-based access control, and self-serve onboarding.',
+    technicalMeta: 'MULTI-TENANCY // AUTOMATED BILLING',
     schematicType: 'saas',
   },
   {
-    id: 'enterprise-software',
+    id: 'api-integrations',
     number: '04',
-    title: 'Enterprise Systems That Eliminate Operational Bottlenecks',
+    title: 'API and System Integrations',
     description:
-      'Mission-critical internal systems and legacy modernizations engineered to streamline business operations and unify company data.',
+      'Mission-critical data pipelines, webhook infrastructures, and enterprise connectors engineered with guaranteed delivery and automated fault tolerance.',
     technicalMeta: 'FAULT-TOLERANT WORKFLOWS // COMPLIANCE READY',
     schematicType: 'enterprise',
   },
   {
-    id: 'cloud-infrastructure',
+    id: 'software-modernization',
     number: '05',
-    title: 'Resilient Cloud Architecture & Cost Control',
+    title: 'Existing Software Modernization',
     description:
-      'Cloud-native architectures that ensure 99.9%+ availability while optimizing infrastructure compute and database expenditure.',
-    technicalMeta: 'HIGH AVAILABILITY // OPTIMIZED RUNTIME COSTS',
+      'Refactoring legacy technical debt, migrating monolithic codebases to scalable cloud architectures, and improving performance without business interruption.',
+    technicalMeta: 'PROGRESSIVE REFACTOR // ZERO DOWNTIME',
     schematicType: 'cloud',
   },
   {
-    id: 'experience-design',
+    id: 'product-improvement',
     number: '06',
-    title: 'High-Conversion Product Design',
+    title: 'Ongoing Product Improvement',
     description:
-      'Clean, intuitive user interfaces and design systems crafted to turn visitors into active customers and reduce friction.',
-    technicalMeta: 'USER RETENTION // FRICTION-FREE WORKFLOWS',
+      'Continuous engineering cycles, performance audits, security hardening, and feature velocity to keep digital products resilient and market-leading.',
+    technicalMeta: 'CONTINUOUS SPRINT // MEASURABLE VELOCITY',
     schematicType: 'design',
   },
 ];
@@ -83,10 +83,13 @@ const SchematicVisual: React.FC<{
   type: ServiceItem['schematicType'];
   isHovered: boolean;
 }> = ({ type, isHovered }) => {
-  const accentColor = '#D6FF3F';
-  const primaryWire = isHovered ? 'rgba(245, 245, 245, 0.45)' : 'rgba(245, 245, 245, 0.2)';
-  const secondaryWire = isHovered ? 'rgba(255, 255, 255, 0.22)' : 'rgba(255, 255, 255, 0.08)';
-  const nodeFill = isHovered ? accentColor : '#F5F5F5';
+  const accentColor = '#0066FF';
+  const primaryWire = isHovered ? 'rgba(9, 9, 11, 0.35)' : 'rgba(9, 9, 11, 0.16)';
+  const secondaryWire = isHovered ? 'rgba(9, 9, 11, 0.18)' : 'rgba(9, 9, 11, 0.08)';
+  const nodeFill = isHovered ? accentColor : '#09090B';
+  const slabFill = isHovered ? '#F4F4F5' : '#FFFFFF';
+  const textMuted = '#71717A';
+  const textPrimary = '#09090B';
 
   switch (type) {
     case 'product':
@@ -114,12 +117,12 @@ const SchematicVisual: React.FC<{
             y="120"
             width="280"
             height="24"
-            rx="2"
-            fill="#121212"
+            rx="4"
+            fill={slabFill}
             stroke={primaryWire}
             strokeWidth="1"
           />
-          <text x="50" y="136" fill="#A8ADB2" fontSize="9" fontFamily="var(--font-mono)" letterSpacing="0.1em">
+          <text x="50" y="136" fill={textMuted} fontSize="9" fontFamily="var(--font-mono)" letterSpacing="0.1em">
             L1 // FOUNDATION SPECIFICATION
           </text>
 
@@ -128,12 +131,12 @@ const SchematicVisual: React.FC<{
             y="75"
             width="240"
             height="24"
-            rx="2"
-            fill="#181818"
+            rx="4"
+            fill={slabFill}
             stroke={isHovered ? accentColor : primaryWire}
             strokeWidth={isHovered ? '1.5' : '1'}
           />
-          <text x="70" y="91" fill={isHovered ? '#F5F5F5' : '#A8ADB2'} fontSize="9" fontFamily="var(--font-mono)" letterSpacing="0.1em">
+          <text x="70" y="91" fill={isHovered ? textPrimary : textMuted} fontSize="9" fontFamily="var(--font-mono)" letterSpacing="0.1em">
             L2 // DISTRIBUTED ARCHITECTURE
           </text>
 
@@ -142,12 +145,12 @@ const SchematicVisual: React.FC<{
             y="30"
             width="180"
             height="24"
-            rx="2"
-            fill="#121212"
+            rx="4"
+            fill={slabFill}
             stroke={primaryWire}
             strokeWidth="1"
           />
-          <text x="100" y="46" fill="#A8ADB2" fontSize="9" fontFamily="var(--font-mono)" letterSpacing="0.1em">
+          <text x="100" y="46" fill={textMuted} fontSize="9" fontFamily="var(--font-mono)" letterSpacing="0.1em">
             L3 // CONTINUOUS SCALE
           </text>
 
@@ -164,7 +167,7 @@ const SchematicVisual: React.FC<{
           <circle cx="320" cy="42" r="3" fill={nodeFill} />
 
           {/* Coordinate Stamp */}
-          <text x="290" y="165" fill="#6E747B" fontSize="8" fontFamily="var(--font-mono)">
+          <text x="290" y="165" fill={textMuted} fontSize="8" fontFamily="var(--font-mono)">
             TOL // 0.001
           </text>
         </svg>
@@ -197,8 +200,8 @@ const SchematicVisual: React.FC<{
 
           {/* Processing Nodes */}
           {/* Ingestion Node */}
-          <rect x="30" y="76" width="36" height="28" rx="2" fill="#121212" stroke={primaryWire} />
-          <text x="36" y="93" fill="#A8ADB2" fontSize="8" fontFamily="var(--font-mono)">INPUT</text>
+          <rect x="30" y="76" width="46" height="28" rx="4" fill={slabFill} stroke={primaryWire} />
+          <text x="36" y="93" fill={textMuted} fontSize="8" fontFamily="var(--font-mono)">INPUT</text>
 
           {/* Core Latent Matrix Node */}
           <rect
@@ -206,34 +209,34 @@ const SchematicVisual: React.FC<{
             y="28"
             width="80"
             height="34"
-            rx="2"
-            fill="#181818"
+            rx="4"
+            fill={slabFill}
             stroke={primaryWire}
           />
-          <text x="170" y="49" fill="#A8ADB2" fontSize="8" fontFamily="var(--font-mono)">
+          <text x="170" y="49" fill={textMuted} fontSize="8" fontFamily="var(--font-mono)">
             LLM // CONTEXT
           </text>
 
           {/* Automated Inference Node */}
           <rect
-            x="160"
+            x="150"
             y="118"
-            width="80"
+            width="100"
             height="34"
-            rx="2"
-            fill="#121212"
+            rx="4"
+            fill={slabFill}
             stroke={isHovered ? accentColor : primaryWire}
           />
-          <text x="168" y="139" fill={isHovered ? '#F5F5F5' : '#A8ADB2'} fontSize="8" fontFamily="var(--font-mono)">
+          <text x="158" y="139" fill={isHovered ? textPrimary : textMuted} fontSize="8" fontFamily="var(--font-mono)">
             WORKFLOW ENGINE
           </text>
 
           {/* Feedback Caliper Arc */}
           <circle cx="350" cy="90" r="4" fill={accentColor} />
-          <circle cx="30" cy="90" r="3" fill="#F5F5F5" />
+          <circle cx="30" cy="90" r="3" fill={textPrimary} />
           
           {/* Micro Telemetry Ticks */}
-          <text x="280" y="30" fill="#6E747B" fontSize="8" fontFamily="var(--font-mono)">
+          <text x="280" y="30" fill={textMuted} fontSize="8" fontFamily="var(--font-mono)">
             LATENCY // &lt;42MS
           </text>
         </svg>
@@ -249,8 +252,8 @@ const SchematicVisual: React.FC<{
           className="capability-schematic-svg"
         >
           {/* API Gateway Ingress */}
-          <rect x="30" y="40" width="45" height="100" rx="2" fill="#121212" stroke={primaryWire} />
-          <text x="38" y="93" fill="#A8ADB2" fontSize="8" fontFamily="var(--font-mono)" transform="rotate(-90 44 93)">
+          <rect x="30" y="40" width="45" height="100" rx="4" fill={slabFill} stroke={primaryWire} />
+          <text x="38" y="93" fill={textMuted} fontSize="8" fontFamily="var(--font-mono)" transform="rotate(-90 44 93)">
             GATEWAY
           </text>
 
@@ -261,22 +264,22 @@ const SchematicVisual: React.FC<{
               y="30"
               width="100"
               height="32"
-              rx="2"
-              fill="#181818"
+              rx="4"
+              fill={slabFill}
               stroke={primaryWire}
             />
-            <text x="130" y="50" fill="#A8ADB2" fontSize="8" fontFamily="var(--font-mono)">TENANT_SHARD_A</text>
+            <text x="130" y="50" fill={textMuted} fontSize="8" fontFamily="var(--font-mono)">TENANT_SHARD_A</text>
 
             <rect
               x="120"
               y="74"
               width="100"
               height="32"
-              rx="2"
-              fill="#121212"
+              rx="4"
+              fill={slabFill}
               stroke={isHovered ? accentColor : primaryWire}
             />
-            <text x="130" y="94" fill={isHovered ? '#F5F5F5' : '#A8ADB2'} fontSize="8" fontFamily="var(--font-mono)">
+            <text x="130" y="94" fill={isHovered ? textPrimary : textMuted} fontSize="8" fontFamily="var(--font-mono)">
               TENANT_SHARD_B
             </text>
 
@@ -285,11 +288,11 @@ const SchematicVisual: React.FC<{
               y="118"
               width="100"
               height="32"
-              rx="2"
-              fill="#181818"
+              rx="4"
+              fill={slabFill}
               stroke={primaryWire}
             />
-            <text x="130" y="138" fill="#A8ADB2" fontSize="8" fontFamily="var(--font-mono)">TENANT_SHARD_C</text>
+            <text x="130" y="138" fill={textMuted} fontSize="8" fontFamily="var(--font-mono)">TENANT_SHARD_C</text>
           </g>
 
           {/* Interconnect Bus */}
@@ -303,11 +306,11 @@ const SchematicVisual: React.FC<{
             y="45"
             width="85"
             height="90"
-            rx="2"
-            fill="#121212"
+            rx="4"
+            fill={slabFill}
             stroke={primaryWire}
           />
-          <text x="272" y="85" fill="#A8ADB2" fontSize="8" fontFamily="var(--font-mono)">
+          <text x="272" y="85" fill={textMuted} fontSize="8" fontFamily="var(--font-mono)">
             HIGH-THRUPUT
           </text>
           <text x="272" y="100" fill={accentColor} fontSize="8" fontFamily="var(--font-mono)">
@@ -338,12 +341,12 @@ const SchematicVisual: React.FC<{
             y="25"
             width="330"
             height="130"
-            rx="2"
+            rx="4"
             fill="none"
             stroke={secondaryWire}
             strokeDasharray="4 4"
           />
-          <text x="35" y="40" fill="#6E747B" fontSize="8" fontFamily="var(--font-mono)">
+          <text x="35" y="40" fill={textMuted} fontSize="8" fontFamily="var(--font-mono)">
             ZERO-TRUST ENCLAVE // SOC2 + ISO COMPLIANT
           </text>
 
@@ -353,15 +356,15 @@ const SchematicVisual: React.FC<{
             y="60"
             width="115"
             height="65"
-            rx="2"
-            fill="#181818"
+            rx="4"
+            fill={slabFill}
             stroke={isHovered ? accentColor : primaryWire}
             strokeWidth={isHovered ? '1.5' : '1'}
           />
-          <text x="62" y="86" fill="#F5F5F5" fontSize="9" fontFamily="var(--font-mono)">
+          <text x="62" y="86" fill={textPrimary} fontSize="9" fontFamily="var(--font-mono)">
             PRIMARY RUNTIME
           </text>
-          <text x="62" y="102" fill="#A8ADB2" fontSize="8" fontFamily="var(--font-mono)">
+          <text x="62" y="102" fill={textMuted} fontSize="8" fontFamily="var(--font-mono)">
             STATUS: ACTIVE // 99.999%
           </text>
 
@@ -371,14 +374,14 @@ const SchematicVisual: React.FC<{
             y="60"
             width="115"
             height="65"
-            rx="2"
-            fill="#121212"
+            rx="4"
+            fill={slabFill}
             stroke={primaryWire}
           />
-          <text x="227" y="86" fill="#F5F5F5" fontSize="9" fontFamily="var(--font-mono)">
+          <text x="227" y="86" fill={textPrimary} fontSize="9" fontFamily="var(--font-mono)">
             STANDBY REPLICA
           </text>
-          <text x="227" y="102" fill="#A8ADB2" fontSize="8" fontFamily="var(--font-mono)">
+          <text x="227" y="102" fill={textMuted} fontSize="8" fontFamily="var(--font-mono)">
             HOT FAILOVER SYNC
           </text>
 
@@ -414,9 +417,9 @@ const SchematicVisual: React.FC<{
           className="capability-schematic-svg"
         >
           {/* Global Anycast Edge Router */}
-          <circle cx="70" cy="90" r="32" fill="#121212" stroke={primaryWire} />
-          <circle cx="70" cy="90" r="22" fill="#181818" stroke={isHovered ? accentColor : secondaryWire} />
-          <text x="54" y="93" fill="#F5F5F5" fontSize="8" fontFamily="var(--font-mono)">EDGE</text>
+          <circle cx="70" cy="90" r="32" fill={slabFill} stroke={primaryWire} />
+          <circle cx="70" cy="90" r="22" fill={slabFill} stroke={isHovered ? accentColor : secondaryWire} />
+          <text x="54" y="93" fill={textPrimary} fontSize="8" fontFamily="var(--font-mono)">EDGE</text>
 
           {/* Region 1 Node Cluster */}
           <rect
@@ -424,14 +427,14 @@ const SchematicVisual: React.FC<{
             y="35"
             width="170"
             height="45"
-            rx="2"
-            fill="#121212"
+            rx="4"
+            fill={slabFill}
             stroke={isHovered ? accentColor : primaryWire}
           />
-          <text x="172" y="55" fill="#F5F5F5" fontSize="8" fontFamily="var(--font-mono)">
+          <text x="172" y="55" fill={textPrimary} fontSize="8" fontFamily="var(--font-mono)">
             REGION_US_EAST // AUTO-SCALED
           </text>
-          <text x="172" y="70" fill="#A8ADB2" fontSize="8" fontFamily="var(--font-mono)">
+          <text x="172" y="70" fill={textMuted} fontSize="8" fontFamily="var(--font-mono)">
             K8S CLUSTER [PODS: 128]
           </text>
 
@@ -441,14 +444,14 @@ const SchematicVisual: React.FC<{
             y="100"
             width="170"
             height="45"
-            rx="2"
-            fill="#121212"
+            rx="4"
+            fill={slabFill}
             stroke={primaryWire}
           />
-          <text x="172" y="120" fill="#F5F5F5" fontSize="8" fontFamily="var(--font-mono)">
+          <text x="172" y="120" fill={textPrimary} fontSize="8" fontFamily="var(--font-mono)">
             REGION_EU_WEST // RESILIENT
           </text>
-          <text x="172" y="135" fill="#A8ADB2" fontSize="8" fontFamily="var(--font-mono)">
+          <text x="172" y="135" fill={textMuted} fontSize="8" fontFamily="var(--font-mono)">
             K8S CLUSTER [PODS: 64]
           </text>
 
@@ -509,15 +512,15 @@ const SchematicVisual: React.FC<{
             y="30"
             width="120"
             height="60"
-            rx="1"
-            fill="#121212"
+            rx="4"
+            fill={slabFill}
             stroke={isHovered ? accentColor : primaryWire}
             strokeWidth="1"
           />
-          <text x="70" y="55" fill="#F5F5F5" fontSize="8" fontFamily="var(--font-mono)">
+          <text x="70" y="55" fill={textPrimary} fontSize="8" fontFamily="var(--font-mono)">
             COMPONENT // NAVIGATION
           </text>
-          <text x="70" y="72" fill="#A8ADB2" fontSize="7" fontFamily="var(--font-mono)">
+          <text x="70" y="72" fill={textMuted} fontSize="7" fontFamily="var(--font-mono)">
             VARIANTS: FIXED / COLLAPSED
           </text>
 
@@ -527,12 +530,12 @@ const SchematicVisual: React.FC<{
             y="60"
             width="130"
             height="60"
-            rx="1"
-            fill="#181818"
+            rx="4"
+            fill={slabFill}
             stroke={primaryWire}
             strokeWidth="1"
           />
-          <text x="210" y="85" fill="#F5F5F5" fontSize="8" fontFamily="var(--font-mono)">
+          <text x="210" y="85" fill={textPrimary} fontSize="8" fontFamily="var(--font-mono)">
             DATA TOKEN // MATRIX
           </text>
           <text x="210" y="102" fill={accentColor} fontSize="7" fontFamily="var(--font-mono)">
@@ -548,9 +551,9 @@ const SchematicVisual: React.FC<{
           </text>
 
           {/* Crosshair Registration Points */}
-          <circle cx="60" cy="30" r="1.5" fill="#F5F5F5" />
-          <circle cx="180" cy="90" r="1.5" fill="#F5F5F5" />
-          <circle cx="330" cy="120" r="1.5" fill="#F5F5F5" />
+          <circle cx="60" cy="30" r="1.5" fill={textPrimary} />
+          <circle cx="180" cy="90" r="1.5" fill={textPrimary} />
+          <circle cx="330" cy="120" r="1.5" fill={textPrimary} />
         </svg>
       );
   }

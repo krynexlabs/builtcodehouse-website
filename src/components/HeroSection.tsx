@@ -39,11 +39,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   };
 
   const capabilities = [
-    'SaaS Platforms',
-    'AI Applications',
-    'Enterprise Software',
-    'Cloud Solutions',
-    'Digital Products',
+    'Website Engineering',
+    'Custom Software Development',
+    'SaaS Product Development',
+    'API & System Integrations',
+    'Software Modernization',
+    'Product Improvement',
   ];
 
   return (
@@ -87,7 +88,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   alignItems: 'center',
                   gap: '10px',
                   padding: '6px 14px',
-                  borderRadius: '4px',
+                  borderRadius: '9999px',
                   backgroundColor: 'var(--surface-tertiary)',
                   border: '1px solid var(--border-subtle)',
                 }}
@@ -98,7 +99,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     fontFamily: 'var(--font-mono)',
                     fontSize: '11px',
                     fontWeight: 500,
-                    letterSpacing: '0.16em',
+                    letterSpacing: '0.14em',
                     textTransform: 'uppercase',
                     color: 'var(--text-secondary)',
                   }}
@@ -111,7 +112,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     fontFamily: 'var(--font-mono)',
                     fontSize: '11px',
                     color: 'var(--brand-accent)',
-                    letterSpacing: '0.1em',
+                    letterSpacing: '0.08em',
                   }}
                 >
                   SYSTEMS ARCHITECTURE
@@ -124,31 +125,33 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <h1
                 style={{
                   fontSize: 'var(--text-hero)',
-                  lineHeight: 1.08,
-                  fontWeight: 600,
-                  letterSpacing: '-0.035em',
+                  lineHeight: 1.06,
+                  fontWeight: 650,
+                  letterSpacing: '-0.04em',
                   color: 'var(--text-primary)',
-                  marginBottom: '20px',
+                  marginBottom: '22px',
                   maxWidth: '780px',
                 }}
               >
-                From Complex Ideas to Exceptional Digital Products.
+                Complex Ideas.
+                <br />
+                <span style={{ color: 'var(--text-primary)' }}>Precisely Engineered.</span>
               </h1>
             </motion.div>
 
-            {/* 3. Subheadline — Answers: What do you do? Who do you help? Why trust you? */}
+            {/* 3. Subheadline */}
             <motion.div variants={itemVariants}>
               <p
                 style={{
                   fontSize: 'var(--text-body)',
-                  lineHeight: 1.6,
+                  lineHeight: 1.65,
                   color: 'var(--text-secondary)',
-                  maxWidth: '580px',
-                  marginBottom: '28px',
+                  maxWidth: '560px',
+                  marginBottom: '32px',
                   fontWeight: 400,
                 }}
               >
-                BuiltCodeHouse helps businesses and founders turn ideas into thoughtfully engineered websites, applications, and software products. Fixed scopes, direct senior engineering, and 100% code ownership.
+                BuiltCodeHouse turns ambitious ideas into thoughtfully designed websites, applications, and software products built for real-world use.
               </p>
             </motion.div>
 
@@ -338,10 +341,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               gridColumn: 'span 5',
               height: '620px',
               position: 'relative',
-              borderRadius: '8px',
+              borderRadius: '16px',
               border: '1px solid var(--border-subtle)',
-              backgroundColor: 'rgba(18, 18, 18, 0.4)',
-              backdropFilter: 'blur(8px)',
+              backgroundColor: 'var(--bg-secondary)',
+              boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.04)',
               overflow: 'hidden',
             }}
           >

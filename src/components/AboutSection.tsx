@@ -62,9 +62,9 @@ const PrincipleSchematic: React.FC<{
   type: Principle['schematicType'];
   isHovered: boolean;
 }> = ({ type, isHovered }) => {
-  const accent = '#D6FF3F';
-  const wire = isHovered ? 'rgba(245, 245, 245, 0.45)' : 'rgba(245, 245, 245, 0.2)';
-  const dim = 'rgba(255, 255, 255, 0.08)';
+  const accent = '#0066FF';
+  const wire = isHovered ? 'rgba(9, 9, 11, 0.35)' : 'rgba(9, 9, 11, 0.16)';
+  const dim = 'rgba(9, 9, 11, 0.08)';
 
   switch (type) {
     case 'excellence':
@@ -623,8 +623,8 @@ export const AboutSection: React.FC = () => {
                     style={{
                       marginTop: '32px',
                       padding: '16px',
-                      backgroundColor: 'rgba(8, 8, 8, 0.65)',
-                      borderRadius: '4px',
+                      backgroundColor: 'var(--surface-tertiary)',
+                      borderRadius: '6px',
                       border: '1px solid var(--border-subtle)',
                       height: '180px',
                       position: 'relative',
