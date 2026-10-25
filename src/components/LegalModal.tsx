@@ -123,14 +123,14 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, isOpen, onClose })
           {isPrivacy ? (
             <>
               <p>
-                <strong>Effective Date:</strong> January 1, 2026. BUILTCODE HOUSE ("we," "our," or "the Company") is committed to protecting confidential engineering briefs, personal data, and proprietary systems requirements in compliance with the General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA).
+                <strong>Effective Date:</strong> January 1, 2026. BUILTCODE HOUSE ("we," "our," or "the Company") is committed to protecting confidential engineering briefs, personal data, and proprietary systems requirements in compliance with international privacy frameworks including the General Data Protection Regulation (GDPR), California Consumer Privacy Act (CCPA), and India's Digital Personal Data Protection Act 2023 (DPDP Act).
               </p>
               <div>
                 <h4 style={{ color: 'var(--text-primary)', fontSize: '15px', marginBottom: '8px' }}>
                   1. Information Ingestion &amp; Scope
                 </h4>
                 <p>
-                  When you submit an architecture brief via our consultation forms or communicate directly with our engineering principals, we collect: full name, corporate email address, organization identity, project domain, estimated budget scope, and submitted technical specifications.
+                  When you submit an architecture brief via our consultation forms or communicate directly with our engineering principals, we collect: full name, corporate email address, organization identity, project type, objectives, timeline, and submitted technical specifications.
                 </p>
               </div>
               <div>
@@ -138,12 +138,20 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, isOpen, onClose })
                   2. Purpose of Data Processing
                 </h4>
                 <p>
-                  Information collected is strictly utilized to conduct feasibility analysis, coordinate technical discovery discussions, and execute preliminary architecture scoping. We never sell, lease, or monetize client project information to any third party.
+                  Information collected is strictly utilized to conduct technical feasibility analysis, coordinate engineering discovery discussions, and execute preliminary architecture scoping. We never sell, lease, or monetize client project information to any third party.
                 </p>
               </div>
               <div>
                 <h4 style={{ color: 'var(--text-primary)', fontSize: '15px', marginBottom: '8px' }}>
-                  3. Mutual Non-Disclosure &amp; Confidentiality
+                  3. Cookies &amp; Client-Side Storage
+                </h4>
+                <p>
+                  BUILTCODE HOUSE does not use third-party advertising cookies, cross-site trackers, or profiling scripts. The website employs browser local storage solely for temporary inquiry redundancy backup (<code>bch_inquiries</code>) to prevent data loss in the event of network disruption. You may clear this cache at any time via your browser settings.
+                </p>
+              </div>
+              <div>
+                <h4 style={{ color: 'var(--text-primary)', fontSize: '15px', marginBottom: '8px' }}>
+                  4. Mutual Non-Disclosure &amp; Confidentiality
                 </h4>
                 <p>
                   All project briefs received through BUILTCODE HOUSE channels are treated under default strict confidentiality. Mutual Non-Disclosure Agreements (NDAs) are executed prior to deep architectural data inspection or codebase access.
@@ -151,10 +159,10 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, isOpen, onClose })
               </div>
               <div>
                 <h4 style={{ color: 'var(--text-primary)', fontSize: '15px', marginBottom: '8px' }}>
-                  4. Data Rights &amp; Erasure
+                  5. Studio Location, Data Rights &amp; Governance
                 </h4>
                 <p>
-                  You retain the right to request full export or permanent cryptographic deletion of your project briefs and contact metadata at any time by emailing <code>contact@builtcodehouse.com</code>.
+                  BUILTCODE HOUSE operates as a digital engineering studio based in Ahmedabad, Gujarat, India. You retain the right to request full export, correction, or permanent deletion of your project briefs and contact metadata at any time by emailing <code>contact@builtcodehouse.com</code>. Formal corporate entity registration details and statutory filings are maintained under company records and will be provided upon bilateral contract execution.
                 </p>
               </div>
             </>
@@ -165,18 +173,18 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, isOpen, onClose })
               </p>
               <div>
                 <h4 style={{ color: 'var(--text-primary)', fontSize: '15px', marginBottom: '8px' }}>
-                  1. Scope of Consultations
+                  1. Scope of Consultations &amp; Website Use
                 </h4>
                 <p>
-                  Preliminary project estimations, architecture briefs, and consultation calls are advisory in nature. Formal engineering deliverables, milestones, SLAs, and commercial commitments are governed exclusively by definitive Master Services Agreements (MSAs) and Statements of Work (SOWs).
+                  Preliminary project estimations, architecture briefs, and consultation calls are advisory in nature. Formal engineering deliverables, milestones, SLAs, and commercial commitments are governed exclusively by definitive Master Services Agreements (MSAs) and Statements of Work (SOWs). No direct commercial transactions or payment processing occur on this website.
                 </p>
               </div>
               <div>
                 <h4 style={{ color: 'var(--text-primary)', fontSize: '15px', marginBottom: '8px' }}>
-                  2. Intellectual Property Rights
+                  2. Intellectual Property Rights &amp; Code Ownership
                 </h4>
                 <p>
-                  All custom software engineering, proprietary algorithms, database schemas, and digital artifacts delivered to our clients under executed Statements of Work become the exclusive, unencumbered intellectual property of the client upon final milestone remuneration.
+                  All custom software engineering, proprietary algorithms, database schemas, and digital artifacts delivered to our clients under executed Statements of Work become the intellectual property of the client upon final milestone remuneration, subject to standard open-source dependencies and third-party library licenses incorporated within the architecture.
                 </p>
               </div>
               <div>
@@ -189,10 +197,10 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, isOpen, onClose })
               </div>
               <div>
                 <h4 style={{ color: 'var(--text-primary)', fontSize: '15px', marginBottom: '8px' }}>
-                  4. Jurisdiction
+                  4. Governing Law &amp; Studio Jurisdiction
                 </h4>
                 <p>
-                  These terms are governed by the laws of the State of Delaware, United States, without regard to conflict of law principles.
+                  BuiltCodeHouse operates from Ahmedabad, Gujarat, India. Governing law, dispute resolution venue, and jurisdiction are formally agreed upon within each client's bilateral Master Services Agreement (MSA) upon onboarding. (Note: Statutory legal entity name and registered office address are subject to final corporate registration documentation confirmed by the business owner).
                 </p>
               </div>
             </>

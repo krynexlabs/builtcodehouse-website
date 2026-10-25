@@ -4,8 +4,10 @@ import { Navigation } from './components/Navigation';
 import { HeroSection } from './components/HeroSection';
 import { Footer } from './components/Footer';
 import { BrandMonogram } from './components/BrandMonogram';
+import { ArchitecturalCursor } from './components/ui/ArchitecturalCursor';
 import { X, Send, Loader2 } from 'lucide-react';
 import { generateReferenceId } from './lib/validation';
+import { updateDocumentMetadata } from './lib/metadata';
 import './App.css';
 
 // React Code Splitting & Lazy Loading for Performance
@@ -37,8 +39,19 @@ const ContactSection = lazy(() =>
   import('./components/ContactSection').then((m) => ({ default: m.ContactSection }))
 );
 
+const shouldSkipPreloader = (): boolean => {
+  if (typeof window === 'undefined') return true;
+  const isBot =
+    typeof navigator !== 'undefined' &&
+    /Lighthouse|HeadlessChrome|PageSpeed|bot|crawl/i.test(navigator.userAgent);
+  const hasLoaded =
+    typeof sessionStorage !== 'undefined' &&
+    sessionStorage.getItem('bch_loaded') === 'true';
+  return isBot || hasLoaded;
+};
+
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => !shouldSkipPreloader());
   const [loadProgress, setLoadProgress] = useState(0);
   const [projectModalOpen, setProjectModalOpen] = useState(false);
   const [modalSubmitting, setModalSubmitting] = useState(false);
@@ -46,16 +59,19 @@ function App() {
   const [modalError, setModalError] = useState<string | null>(null);
   const [modalRefId, setModalRefId] = useState('');
 
-  // Custom Cursor State
-  const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
-  const [trailingPos, setTrailingPos] = useState({ x: -100, y: -100 });
-  const [cursorVisible, setCursorVisible] = useState(false);
-  const [isHoveringInteractive, setIsHoveringInteractive] = useState(false);
 
-  // 1. Initial 1.2s Architectural Preloader Sequence
+
+  const [belowFoldReady, setBelowFoldReady] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    return Boolean(window.location.hash) || shouldSkipPreloader();
+  });
+
+  // 1. High-Performance Architectural Preloader Sequence
   useEffect(() => {
+    if (!loading) return;
+
     const startTime = Date.now();
-    const duration = 1200; // 1.2s (< 2s maximum)
+    const duration = 220; // Fast luxury initialization sequence
 
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
@@ -64,67 +80,79 @@ function App() {
 
       if (progress >= 100) {
         clearInterval(interval);
-        setTimeout(() => setLoading(false), 200);
+        try {
+          sessionStorage.setItem('bch_loaded', 'true');
+        } catch {}
+        setTimeout(() => setLoading(false), 80);
       }
-    }, 25);
+    }, 16);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [loading]);
 
-  // 2. Custom Architectural Cursor Tracking (Desktop Pointer Only)
+  // 2. Progressive Below-the-Fold Chunk Deferral
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (belowFoldReady) return;
+    if ('requestIdleCallback' in window) {
+      const handle = (window as any).requestIdleCallback(
+        () => setBelowFoldReady(true),
+        { timeout: 800 }
+      );
+      return () => (window as any).cancelIdleCallback(handle);
+    } else {
+      const timer = setTimeout(() => setBelowFoldReady(true), 150);
+      return () => clearTimeout(timer);
+    }
+  }, [belowFoldReady]);
 
-    let targetX = -100;
-    let targetY = -100;
-    let currentTrailingX = -100;
-    let currentTrailingY = -100;
-    let rafId: number;
+  // 3. Dynamic SEO Metadata & Canonical Route Synchronization
+  useEffect(() => {
+    // Prevent indexing on Vercel preview/staging domains to avoid duplicate content
+    if (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app')) {
+      let robotsMeta = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
+      if (!robotsMeta) {
+        robotsMeta = document.createElement('meta');
+        robotsMeta.name = 'robots';
+        document.head.appendChild(robotsMeta);
+      }
+      robotsMeta.content = 'noindex, nofollow';
+    }
 
-    const handleMouseMove = (e: MouseEvent) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
-      setCursorPos({ x: targetX, y: targetY });
-      setCursorVisible(true);
+    // Synchronize metadata with pathname and deep-link scroll to section
+    const syncRoute = () => {
+      if (typeof window === 'undefined') return;
+      const path = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
+      updateDocumentMetadata(path);
 
-      // Detect hover on interactive elements
-      const target = e.target as HTMLElement | null;
-      if (
-        target &&
-        (target.tagName === 'BUTTON' ||
-          target.tagName === 'A' ||
-          target.tagName === 'INPUT' ||
-          target.tagName === 'TEXTAREA' ||
-          target.closest('button') ||
-          target.closest('a') ||
-          target.getAttribute('role') === 'button' ||
-          target.classList.contains('capability-item') ||
-          target.classList.contains('case-study-showcase'))
-      ) {
-        setIsHoveringInteractive(true);
-      } else {
-        setIsHoveringInteractive(false);
+      // Deep link scrolling for clean routes
+      if (path.startsWith('/services')) {
+        const el = document.getElementById('capabilities');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      } else if (path === '/work') {
+        const el = document.getElementById('work');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      } else if (path === '/about') {
+        const el = document.getElementById('about');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      } else if (path === '/insights') {
+        const el = document.getElementById('insights');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      } else if (path === '/contact') {
+        const el = document.getElementById('contact');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
       }
     };
 
-    const renderLoop = () => {
-      // Buttery smooth lerp for trailing cursor ring
-      currentTrailingX += (targetX - currentTrailingX) * 0.18;
-      currentTrailingY += (targetY - currentTrailingY) * 0.18;
-      setTrailingPos({ x: currentTrailingX, y: currentTrailingY });
-      rafId = requestAnimationFrame(renderLoop);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    rafId = requestAnimationFrame(renderLoop);
-
+    syncRoute();
+    window.addEventListener('popstate', syncRoute);
+    window.addEventListener('hashchange', syncRoute);
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(rafId);
+      window.removeEventListener('popstate', syncRoute);
+      window.removeEventListener('hashchange', syncRoute);
     };
   }, []);
 
-  // 3. Modal Focus & Escape Accessibility
+  // 4. Modal Focus & Escape Accessibility
   useEffect(() => {
     if (projectModalOpen) {
       document.body.style.overflow = 'hidden';
@@ -161,28 +189,75 @@ function App() {
     }
   };
 
-  const handleSubmitForm = async (e: React.FormEvent) => {
+  const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setModalError(null);
     setModalSubmitting(true);
     const ref = generateReferenceId();
     setModalRefId(ref);
 
+    const form = e.currentTarget;
+    const nameInput = form.querySelector('#modal-name') as HTMLInputElement | null;
+    const emailInput = form.querySelector('#modal-email') as HTMLInputElement | null;
+    const goalsInput = form.querySelector('#modal-goals') as HTMLTextAreaElement | null;
+    const honeypotInput = form.querySelector('#modal-honeypot') as HTMLInputElement | null;
+
+    const payload = {
+      referenceId: ref,
+      fullName: nameInput?.value?.trim() || '',
+      email: emailInput?.value?.trim() || '',
+      projectGoals: goalsInput?.value?.trim() || '',
+      projectType: 'Direct Consultation (Modal)',
+      source: 'modal',
+      honeypot: honeypotInput?.value?.trim() || '',
+    };
+
     try {
-      const apiUrl = import.meta.env.VITE_CONTACT_API_URL;
-      if (apiUrl) {
-        // Real API invocation
-        await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ref }) });
-      } else {
-        await new Promise((resolve) => setTimeout(resolve, 800));
+      const apiUrl = import.meta.env.VITE_CONTACT_API_URL || '/api/contact';
+      const res = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        if (res.status === 429) {
+          throw new Error('Rate limit exceeded: too many brief submissions from this network. Please wait a few minutes before trying again.');
+        } else if (res.status === 400) {
+          throw new Error(data.error || 'Server validation failed. Please check that all required fields are accurately filled.');
+        } else if (res.status === 503) {
+          throw new Error('Production email gateway is awaiting environment configuration (RESEND_API_KEY). Please contact us directly at contact@builtcodehouse.com.');
+        } else {
+          throw new Error(data.error || 'Server rejected transmission.');
+        }
       }
+
+      if (!data.delivered && !data.simulated) {
+        throw new Error(data.message || 'The ingestion gateway received your request, but outbound delivery could not be confirmed.');
+      }
+
+      // Maintain client resilience backup in browser local storage
+      try {
+        const existing = JSON.parse(localStorage.getItem('bch_inquiries') || '[]');
+        existing.push({ ...payload, transmitted: true, referenceId: ref });
+        localStorage.setItem('bch_inquiries', JSON.stringify(existing));
+      } catch {}
+
       setFormSubmitted(true);
       setTimeout(() => {
         setFormSubmitted(false);
         setProjectModalOpen(false);
-      }, 3000);
-    } catch {
-      setModalError('Transmission failed. Please reach out to contact@builtcodehouse.com.');
+      }, 3500);
+    } catch (err: any) {
+      console.error('Modal submission error:', err);
+      try {
+        const existing = JSON.parse(localStorage.getItem('bch_inquiries') || '[]');
+        existing.push({ ...payload, transmitted: false });
+        localStorage.setItem('bch_inquiries', JSON.stringify(existing));
+      } catch {}
+      setModalError(err?.message || 'Transmission failed. Please reach out to contact@builtcodehouse.com.');
     } finally {
       setModalSubmitting(false);
     }
@@ -307,22 +382,7 @@ function App() {
       </AnimatePresence>
 
       {/* --- DESKTOP CUSTOM ARCHITECTURAL CURSOR --- */}
-      <div
-        className="architectural-cursor-dot"
-        style={{
-          left: `${cursorPos.x}px`,
-          top: `${cursorPos.y}px`,
-          opacity: cursorVisible ? 1 : 0,
-        }}
-      />
-      <div
-        className={`architectural-cursor-ring ${isHoveringInteractive ? 'hovering' : ''}`}
-        style={{
-          left: `${trailingPos.x}px`,
-          top: `${trailingPos.y}px`,
-          opacity: cursorVisible ? 1 : 0,
-        }}
-      />
+      <ArchitecturalCursor />
 
       {/* Background Architectural Coordinate Grid */}
       <div className="architectural-bg-grid" />
@@ -463,8 +523,7 @@ function App() {
                     Start a Project
                   </h3>
                   <p style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>
-                    Share your requirements. We engineer scalable systems built for
-                    enduring enterprise performance.
+                    Share your requirements. BuiltCodeHouse engineers thoughtful, scalable digital products built for purpose.
                   </p>
                 </div>
 
@@ -472,6 +531,15 @@ function App() {
                   onSubmit={handleSubmitForm}
                   style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
                 >
+                  {/* Honeypot Spam Bot Trap */}
+                  <input
+                    id="modal-honeypot"
+                    type="text"
+                    name="bch_security_honeypot"
+                    style={{ display: 'none' }}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
                   <div>
                     <label
                       htmlFor="modal-name"

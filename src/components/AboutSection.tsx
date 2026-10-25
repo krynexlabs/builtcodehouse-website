@@ -359,8 +359,7 @@ export const AboutSection: React.FC = () => {
                 color: 'var(--text-secondary)',
               }}
             >
-              BUILTCODE HOUSE exists to design and engineer digital products that
-              deliver meaningful impact at scale.
+              BuiltCodeHouse is a digital engineering studio based in Ahmedabad, India, helping businesses and founders turn ambitious ideas into thoughtfully engineered digital products.
             </p>
           </motion.div>
         </div>
@@ -857,14 +856,27 @@ export const AboutSection: React.FC = () => {
                   fontSize: '15px',
                   lineHeight: 1.7,
                   color: 'var(--text-secondary)',
-                  marginBottom: '28px',
+                  marginBottom: '16px',
                 }}
               >
-                With over a decade of hands-on software engineering experience across
-                distributed systems, high-scale SaaS architectures, and cloud infrastructure,
-                Dixit leads every BUILTCODE HOUSE engagement from technical discovery through
-                production deployment.
+                Based in Ahmedabad, India, BuiltCodeHouse engineers digital products for businesses locally and globally. With hands-on software engineering experience across distributed systems, high-scale SaaS architectures, and cloud infrastructure, Dixit leads every engagement from technical discovery through production deployment.
               </p>
+
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  marginBottom: '24px',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '11px',
+                  color: 'var(--text-secondary)',
+                  letterSpacing: '0.04em',
+                }}
+              >
+                <span style={{ color: 'var(--brand-accent)' }}>STUDIO LOCATION:</span>
+                <span>Ahmedabad, Gujarat, India</span>
+              </div>
 
               <div
                 style={{
@@ -980,10 +992,10 @@ export const AboutSection: React.FC = () => {
                       marginBottom: '6px',
                     }}
                   >
-                    02 // 100% IP RIGHTS
+                    02 // CLEAR CODE OWNERSHIP
                   </span>
                   <span style={{ fontSize: '13px', color: 'var(--text-primary)', lineHeight: 1.5, display: 'block' }}>
-                    Full source code and infrastructure ownership transferred to you.
+                    Full custom source code and infrastructure ownership transferred to you.
                   </span>
                 </div>
 

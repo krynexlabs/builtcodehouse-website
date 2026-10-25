@@ -268,7 +268,7 @@ export const InsightsSection: React.FC = () => {
         </div>
 
         {/* --- LEAD FEATURED ARTICLE (Broadsheet Publication Showcase) --- */}
-        <motion.article
+        <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
@@ -463,7 +463,7 @@ export const InsightsSection: React.FC = () => {
               <EditorialSchematic type={leadArticle.schematicType} isHovered={leadHovered} />
             </div>
           </div>
-        </motion.article>
+        </motion.div>
 
         {/* --- 3 SECONDARY EDITORIAL ARTICLES (Triptych Publication List) --- */}
         <motion.div
@@ -483,7 +483,7 @@ export const InsightsSection: React.FC = () => {
             const isHovered = hoveredArticle === article.number;
 
             return (
-              <motion.article
+              <motion.div
                 key={article.number}
                 variants={itemVariants}
                 onMouseEnter={() => setHoveredArticle(article.number)}
@@ -633,7 +633,7 @@ export const InsightsSection: React.FC = () => {
                     }}
                   />
                 </div>
-              </motion.article>
+              </motion.div>
             );
           })}
         </motion.div>

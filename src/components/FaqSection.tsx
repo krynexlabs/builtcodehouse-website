@@ -12,9 +12,19 @@ export const FaqSection: React.FC = () => {
 
   const faqs = [
     {
+      question: 'What is the official name of the company and what services does BuiltCodeHouse provide?',
+      answer:
+        'Our official company name is BuiltCodeHouse (also commonly written as BuiltCode House). We are a software development company and digital engineering studio based in Ahmedabad, Gujarat, India. Our core offerings include custom software development, web application engineering, SaaS product development, practical AI workflow automation, and enterprise cloud infrastructure for businesses locally and worldwide.',
+    },
+    {
+      question: 'Where is BuiltCodeHouse located, and how do you collaborate with global clients?',
+      answer:
+        'BuiltCodeHouse is based in Ahmedabad, Gujarat, India. We partner with founders and businesses locally in India as well as globally across North America, Europe, and Asia-Pacific. We structure engagements around disciplined asynchronous communication via Slack or Linear, recorded technical walkthroughs, and overlapping time windows for live sprint reviews and discovery sessions.',
+    },
+    {
       question: 'Who owns the code and intellectual property once a project is finished?',
       answer:
-        'You own 100% of all intellectual property, source code, database architectures, and design files upon final milestone completion. We do not use proprietary vendor lock-in frameworks, and we hand over full administrative ownership of your GitHub repositories and cloud infrastructure.',
+        'You own all custom intellectual property, bespoke source code, database architectures, and design files upon final milestone payment. Standard open-source libraries remain governed by their respective permissive licenses. We do not use proprietary vendor lock-in frameworks, and we hand over full administrative ownership of your Git repositories and cloud infrastructure.',
     },
     {
       question: 'How do you structure project milestones and engagement agreements?',
@@ -24,7 +34,7 @@ export const FaqSection: React.FC = () => {
     {
       question: 'How do you communicate during development?',
       answer:
-        'You communicate directly with our engineering principals. We set up a shared Slack or Discord channel for daily asynchronous communication, provide weekly recorded Loom video walkthroughs of deployed features, and host bi-weekly sprint planning calls. You have real-time access to the codebase and staging environments at all times.',
+        'You communicate directly with our engineering principals. We set up a shared Slack or Discord channel for daily asynchronous communication, provide weekly recorded video walkthroughs of deployed features, and host bi-weekly sprint planning calls. You have real-time access to the codebase and staging environments at all times.',
     },
     {
       question: 'What happens if we need adjustments or scope changes during the build?',

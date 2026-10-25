@@ -1,8 +1,19 @@
 {
-  "name": "BUILTCODE HOUSE — Digital Engineering Company",
-  "short_name": "BUILTCODE",
-  "description": "Architecting and engineering high-scale SaaS platforms, AI systems, and enterprise infrastructure.",
+  "name": "BuiltCodeHouse | Software Development Company",
+  "short_name": "BuiltCodeHouse",
+  "description": "BuiltCodeHouse is a digital engineering studio based in Ahmedabad, India, building custom software, web applications and SaaS products for businesses.",
   "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
     {
       "src": "/favicon.svg",
       "sizes": "any",

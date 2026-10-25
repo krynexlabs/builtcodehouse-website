@@ -1,0 +1,25 @@
+{
+  "specVersion": "1.0",
+  "entries": [
+    {
+      "identifier": "urn:air:builtcodehouse:engineering:catalog",
+      "displayName": "BuiltCodeHouse Software Development & Digital Engineering Studio",
+      "alternateNames": [
+        "BuiltCode House",
+        "BuiltCodeHouse India",
+        "BuiltCode House Ahmedabad"
+      ],
+      "type": "application/ai-catalog+json",
+      "url": "https://builtcodehouse.com/.well-known/ai-catalog.json",
+      "canonicalDomain": "https://builtcodehouse.com",
+      "location": "Ahmedabad, Gujarat, India",
+      "representativeQueries": [
+        "What software development services does BuiltCodeHouse offer in Ahmedabad?",
+        "BuiltCode House custom software engineering studio Ahmedabad India",
+        "BuiltCodeHouse SaaS product development and web applications",
+        "How to contact Dixit Sharma and BuiltCodeHouse engineering principals in Ahmedabad",
+        "BuiltCodeHouse custom LLM and AI automation solutions"
+      ]
+    }
+  ]
+}

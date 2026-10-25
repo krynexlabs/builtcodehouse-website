@@ -1,7 +1,11 @@
-# BUILTCODE HOUSE — Production Robots Policy
+# BuiltCodeHouse — Production Robots Policy
 User-agent: *
 Allow: /
 Disallow: /api/
 
 # Canonical Sitemap
 Sitemap: https://builtcodehouse.com/sitemap.xml
+
+# AI Engine Declarations
+# LLM Manifest: https://builtcodehouse.com/llms.txt
+# AI Catalog: https://builtcodehouse.com/.well-known/ai-catalog.json

@@ -49,11 +49,13 @@ export const HeroVisual3D: React.FC = () => {
     camera.position.set(24, 18, 28);
     camera.lookAt(0, 0, 0);
 
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
     // Renderer with high performance & ACES Filmic mapping
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({
-        antialias: true,
+        antialias: !isMobile,
         alpha: true,
         powerPreference: 'high-performance',
       });
@@ -61,7 +63,7 @@ export const HeroVisual3D: React.FC = () => {
       return;
     }
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.0 : 1.75));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.15;
     container.appendChild(renderer.domElement);

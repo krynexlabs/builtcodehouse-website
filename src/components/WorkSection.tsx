@@ -62,7 +62,7 @@ const caseStudies: CaseStudy[] = [
     title: 'HEALTHCARE MANAGEMENT SYSTEM',
     overview:
       'Secure healthcare management ecosystem designed to improve operational coordination and patient workflow efficiency.',
-    verificationBadge: 'ARCHITECTURE REVIEWED // HIPAA COMPLIANT',
+    verificationBadge: 'ARCHITECTURE REVIEWED // HIPAA-ALIGNED ENCLAVE',
     techStack: ['React', 'Node.js', 'MongoDB', 'Azure'],
     calloutDetails: [
       {
@@ -78,8 +78,8 @@ const caseStudies: CaseStudy[] = [
         desc: 'Standardized clinical workflow routing prioritizing acute interventions with sub-second synchronization.',
       },
       {
-        title: 'Regulatory Audit Pipeline',
-        desc: 'Automated compliance enforcement designed for HIPAA, SOC 2 Type II, and ISO 27799 operational governance.',
+        title: 'Regulatory Security Safeguards',
+        desc: 'Automated governance safeguards engineered around HIPAA, SOC 2, and ISO 27799 security baselines.',
       },
     ],
     visualType: 'healthcare',
@@ -541,8 +541,7 @@ export const WorkSection: React.FC = () => {
               maxWidth: '680px',
             }}
           >
-            From AI platforms to enterprise systems, we deliver software engineered
-            to solve complex problems and create measurable value.
+            Explore representative architecture demonstrations and digital engineering case studies engineered to solve complex operational challenges.
           </motion.p>
         </div>
 

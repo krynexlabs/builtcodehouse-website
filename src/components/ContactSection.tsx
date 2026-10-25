@@ -83,36 +83,58 @@ export const ContactSection: React.FC = () => {
       projectGoals: projectGoals.trim(),
       timeline,
       projectDetails: projectDetails.trim(),
+      honeypot: honeypot.trim(),
     };
 
     try {
-      const apiUrl = import.meta.env.VITE_CONTACT_API_URL;
-      if (apiUrl) {
-        const res = await fetch(apiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        if (!res.ok) {
-          throw new Error(`Network transmission rejected with status ${res.status}`);
+      const apiUrl = import.meta.env.VITE_CONTACT_API_URL || '/api/contact';
+
+      const res = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        if (res.status === 429) {
+          throw new Error('Rate limit exceeded: too many brief submissions from this network. Please wait a few minutes before trying again.');
+        } else if (res.status === 400) {
+          throw new Error(data.error || 'Server validation failed. Please check that all required fields are accurately filled.');
+        } else if (res.status === 503) {
+          throw new Error('Production email gateway is awaiting environment configuration (RESEND_API_KEY). Please contact us directly at contact@builtcodehouse.com.');
+        } else {
+          throw new Error(data.error || `Server transmission rejected (Status ${res.status}).`);
         }
-      } else {
-        // High-fidelity production simulation with local persistence backup
-        await new Promise((resolve) => setTimeout(resolve, 850));
-        try {
-          const existing = JSON.parse(localStorage.getItem('bch_inquiries') || '[]');
-          existing.push(payload);
-          localStorage.setItem('bch_inquiries', JSON.stringify(existing));
-        } catch {}
       }
 
-      setReferenceId(ref);
+      if (!data.delivered && !data.simulated) {
+        throw new Error(data.message || 'The ingestion gateway received your request, but outbound delivery to the company mailbox could not be confirmed.');
+      }
+
+      const verifiedRef = data.referenceId || ref;
+      setReferenceId(verifiedRef);
+
+      // Maintain client resilience backup in browser local storage
+      try {
+        const existing = JSON.parse(localStorage.getItem('bch_inquiries') || '[]');
+        existing.push({ ...payload, transmitted: true, referenceId: verifiedRef });
+        localStorage.setItem('bch_inquiries', JSON.stringify(existing));
+      } catch {}
+
       setSubmissionTimestamp(new Date().toLocaleTimeString());
       setIsSubmitted(true);
     } catch (err: any) {
       console.error('Submission error:', err);
+      // Maintain client resilience backup in browser local storage marked as untransmitted
+      try {
+        const existing = JSON.parse(localStorage.getItem('bch_inquiries') || '[]');
+        existing.push({ ...payload, transmitted: false });
+        localStorage.setItem('bch_inquiries', JSON.stringify(existing));
+      } catch {}
       setErrorMessage(
-        err?.message || 'Transmission failed. Our network endpoint could not be reached.'
+        err?.message || 'Transmission failed. Our network endpoint could not be reached. Your brief draft has been preserved in your browser cache.'
       );
     } finally {
       setIsSubmitting(false);
@@ -224,8 +246,7 @@ export const ContactSection: React.FC = () => {
               maxWidth: '720px',
             }}
           >
-            Whether you're launching a SaaS platform, developing an AI product, modernizing
-            enterprise software, or creating a new digital experience, we'd love to hear about it.
+            BuiltCodeHouse is a digital engineering studio based in Ahmedabad, India. Whether you're launching a SaaS platform, developing an AI product, modernizing enterprise software, or creating a new digital experience, we'd love to hear about it.
           </motion.p>
         </div>
 
@@ -249,7 +270,7 @@ export const ContactSection: React.FC = () => {
               gridColumn: 'span 5',
               display: 'flex',
               flexDirection: 'column',
-              gap: '40px',
+              gap: '32px',
             }}
           >
             {/* 1. Availability Status Card */}
@@ -302,7 +323,7 @@ export const ContactSection: React.FC = () => {
                 }}
               >
                 We partner with ambitious founders, startups, and businesses that value
-                exceptional engineering.
+                thoughtful engineering.
               </p>
 
               <div
@@ -323,7 +344,88 @@ export const ContactSection: React.FC = () => {
               </div>
             </div>
 
-            {/* 2. Onboarding & Discovery Process Card */}
+            {/* 2. Studio Location & Reach Card */}
+            <div
+              style={{
+                backgroundColor: 'var(--bg-secondary)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: '6px',
+                padding: '32px',
+                position: 'relative',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom: '16px',
+                  paddingBottom: '14px',
+                  borderBottom: '1px solid var(--border-subtle)',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '11px',
+                    color: 'var(--brand-accent)',
+                    letterSpacing: '0.14em',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  STUDIO HEADQUARTERS
+                </span>
+                <span
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '10px',
+                    color: 'var(--text-muted)',
+                  }}
+                >
+                  TIMEZONE: IST (UTC+5:30)
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div>
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '10px',
+                      color: 'var(--text-muted)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.1em',
+                      display: 'block',
+                      marginBottom: '2px',
+                    }}
+                  >
+                    Location:
+                  </span>
+                  <span
+                    style={{
+                      fontSize: '15px',
+                      color: 'var(--text-primary)',
+                      fontWeight: 500,
+                    }}
+                  >
+                    Ahmedabad, Gujarat, India
+                  </span>
+                </div>
+
+                <p
+                  style={{
+                    fontSize: '13px',
+                    color: 'var(--text-secondary)',
+                    lineHeight: 1.55,
+                    margin: '4px 0 0 0',
+                  }}
+                >
+                  Based in Ahmedabad, India. Building digital products for businesses locally and globally.
+                </p>
+              </div>
+            </div>
+
+            {/* 3. Onboarding & Discovery Process Card */}
             <div
               style={{
                 backgroundColor: 'var(--bg-secondary)',
@@ -413,10 +515,10 @@ export const ContactSection: React.FC = () => {
                       fontWeight: 600,
                     }}
                   >
-                    3. Rapid Onboarding &amp; Day-1 IP Transfer
+                    3. Rapid Onboarding &amp; Clear Code Ownership
                   </span>
                   <span style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.5, display: 'block' }}>
-                    Direct communication channel via Slack/Linear with full source code ownership assigned to you.
+                    Direct communication channel via Slack/Linear with full custom source code ownership assigned to you.
                   </span>
                 </div>
               </div>
@@ -446,7 +548,7 @@ export const ContactSection: React.FC = () => {
                 PREFER EMAIL?
               </span>
 
-              <h4
+              <h3
                 style={{
                   fontSize: '20px',
                   fontWeight: 500,
@@ -456,7 +558,7 @@ export const ContactSection: React.FC = () => {
                 }}
               >
                 Direct Principal Ingestion
-              </h4>
+              </h3>
 
               <div
                 style={{
@@ -518,7 +620,7 @@ export const ContactSection: React.FC = () => {
               >
                 ENGAGEMENT THESIS
               </span>
-              <h4
+              <h3
                 style={{
                   fontSize: '18px',
                   fontWeight: 600,
@@ -526,10 +628,23 @@ export const ContactSection: React.FC = () => {
                   color: 'var(--text-primary)',
                   lineHeight: 1.3,
                   textTransform: 'uppercase',
+                  marginBottom: '8px',
                 }}
               >
                 GREAT PRODUCTS BEGIN WITH GREAT CONVERSATIONS.
-              </h4>
+              </h3>
+              <p
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '11px',
+                  color: 'var(--text-secondary)',
+                  letterSpacing: '0.06em',
+                  lineHeight: 1.6,
+                  margin: 0,
+                }}
+              >
+                Thoughtful engineering. Clear ownership. Software built with purpose.
+              </p>
             </div>
           </motion.div>
 

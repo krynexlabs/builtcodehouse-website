@@ -70,7 +70,7 @@ export const EngagementSection: React.FC<EngagementSectionProps> = ({ onStartPro
         'Automated CI/CD deployment pipelines',
         'Live staging environments for reviews',
         'Direct Slack/Linear communication',
-        '100% intellectual property transfer',
+        'Full custom code ownership & IP assignment',
       ],
     },
   ];

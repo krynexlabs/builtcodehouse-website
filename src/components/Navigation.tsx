@@ -144,6 +144,8 @@ export const Navigation: React.FC<NavigationProps> = ({ onStartProject }) => {
           <a
             href="/"
             onClick={handleLogoClick}
+            title="BuiltCodeHouse | Software Development Company in Ahmedabad, India"
+            aria-label="BuiltCodeHouse — Software Development Company in Ahmedabad, India"
             style={{
               display: 'flex',
               alignItems: 'center',

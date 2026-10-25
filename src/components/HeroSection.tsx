@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { motion, type Variants } from 'framer-motion';
-import { HeroVisual3D } from './HeroVisual3D';
+import { SceneFallback } from './three/SceneFallback';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
+
+const HeroVisual3D = lazy(() =>
+  import('./HeroVisual3D').then((m) => ({ default: m.HeroVisual3D }))
+);
 
 interface HeroSectionProps {
   onStartProject?: () => void;
@@ -14,23 +18,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
   // Motion curve & animation foundation
   const transitionPrecision = {
-    duration: 0.85,
+    duration: 0.45,
     ease: [0.16, 1, 0.3, 1] as const,
   };
 
   const containerVariants: Variants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0.01 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.15,
+        staggerChildren: 0.05,
+        delayChildren: 0.04,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0.01, y: 12 },
     visible: {
       opacity: 1,
       y: 0,
@@ -114,7 +118,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     letterSpacing: '0.1em',
                   }}
                 >
-                  SYSTEMS ARCHITECTURE
+                  AHMEDABAD, INDIA
                 </span>
               </div>
             </motion.div>
@@ -148,7 +152,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   fontWeight: 400,
                 }}
               >
-                BuiltCodeHouse helps businesses and founders turn ideas into thoughtfully engineered websites, applications, and software products. Fixed scopes, direct senior engineering, and 100% code ownership.
+                BuiltCodeHouse is a digital engineering studio based in Ahmedabad, India, helping businesses and founders turn ambitious ideas into thoughtfully engineered digital products.
               </p>
             </motion.div>
 
@@ -275,7 +279,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     marginBottom: '4px',
                   }}
                 >
-                  100% IP ASSIGNMENT
+                  CLEAR CODE OWNERSHIP
                 </span>
                 <span
                   style={{
@@ -345,7 +349,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               overflow: 'hidden',
             }}
           >
-            <HeroVisual3D />
+            <Suspense fallback={<SceneFallback />}>
+              <HeroVisual3D />
+            </Suspense>
           </div>
         </motion.div>
 

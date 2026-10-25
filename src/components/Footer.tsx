@@ -15,6 +15,44 @@ export const Footer: React.FC = () => {
     type: 'privacy',
   });
 
+  // Sync modal state with URL hash (#privacy, #terms) for direct deep-linking
+  React.useEffect(() => {
+    const handleUrlChange = () => {
+      const hash = window.location.hash.toLowerCase();
+      const path = window.location.pathname.toLowerCase();
+      if (hash === '#privacy' || path === '/privacy') {
+        setLegalModal({ open: true, type: 'privacy' });
+      } else if (hash === '#terms' || path === '/terms') {
+        setLegalModal({ open: true, type: 'terms' });
+      }
+    };
+
+    handleUrlChange();
+    window.addEventListener('hashchange', handleUrlChange);
+    window.addEventListener('popstate', handleUrlChange);
+    return () => {
+      window.removeEventListener('hashchange', handleUrlChange);
+      window.removeEventListener('popstate', handleUrlChange);
+    };
+  }, []);
+
+  const handleOpenLegal = (type: 'privacy' | 'terms') => {
+    setLegalModal({ open: true, type });
+    history.pushState(null, '', `/${type}`);
+    window.dispatchEvent(new Event('popstate'));
+  };
+
+  const handleCloseLegal = () => {
+    setLegalModal((prev) => ({ ...prev, open: false }));
+    const path = window.location.pathname.toLowerCase();
+    if (path === '/privacy' || path === '/terms') {
+      history.replaceState(null, '', '/');
+      window.dispatchEvent(new Event('popstate'));
+    } else if (window.location.hash === '#privacy' || window.location.hash === '#terms') {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  };
+
   const navLinks = [
     { label: 'Capabilities', href: '#capabilities' },
     { label: 'Why Us', href: '#trust' },
@@ -28,10 +66,9 @@ export const Footer: React.FC = () => {
   ];
 
   const socialLinks = [
-    { label: 'Email', href: 'mailto:contact@builtcodehouse.com' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/company/builtcode-house' },
-    { label: 'GitHub', href: 'https://github.com/builtcodehouse' },
-    { label: 'X (Twitter)', href: 'https://x.com/builtcodehouse' },
+    { label: 'Email: contact@builtcodehouse.com', href: 'mailto:contact@builtcodehouse.com' },
+    { label: 'Technical Discovery Brief', href: '#contact' },
+    { label: 'Studio: Ahmedabad, India', href: '#about' },
   ];
 
   const handleLogoClick = (e: React.MouseEvent) => {
@@ -100,7 +137,7 @@ export const Footer: React.FC = () => {
                     marginTop: '2px',
                   }}
                 >
-                  DIGITAL ENGINEERING COMPANY
+                  DIGITAL ENGINEERING STUDIO
                 </span>
               </div>
             </a>
@@ -110,13 +147,32 @@ export const Footer: React.FC = () => {
                 fontSize: '14px',
                 lineHeight: 1.65,
                 color: 'var(--text-secondary)',
-                maxWidth: '360px',
-                marginBottom: '28px',
+                maxWidth: '380px',
+                marginBottom: '16px',
               }}
             >
-              We architect and build scalable software, AI systems, and enterprise platforms
-              for ambitious companies worldwide.
+              BuiltCodeHouse is a digital engineering studio based in Ahmedabad, India, helping businesses and founders turn ambitious ideas into thoughtfully engineered digital products.
             </p>
+
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '6px',
+                marginBottom: '24px',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '11px',
+                color: 'var(--text-muted)',
+                letterSpacing: '0.06em',
+              }}
+            >
+              <div>
+                <span style={{ color: 'var(--brand-accent)' }}>LOCATION:</span> Ahmedabad, Gujarat, India
+              </div>
+              <div>
+                <span style={{ color: 'var(--brand-accent)' }}>REACH:</span> Serving businesses locally &amp; globally
+              </div>
+            </div>
 
             <div
               style={{
@@ -272,11 +328,14 @@ export const Footer: React.FC = () => {
                 letterSpacing: '0.08em',
               }}
             >
-              © {CURRENT_YEAR} BUILTCODE HOUSE. ALL RIGHTS RESERVED.
+              © {CURRENT_YEAR} BUILTCODE HOUSE. BASED IN AHMEDABAD, INDIA. ALL RIGHTS RESERVED.
             </span>
-            <span style={{ color: 'var(--border-subtle)', fontSize: '11px' }}>/</span>
-            <button
-              onClick={() => setLegalModal({ open: true, type: 'privacy' })}
+            <a
+              href="/privacy"
+              onClick={(e) => {
+                e.preventDefault();
+                handleOpenLegal('privacy');
+              }}
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '11px',
@@ -286,16 +345,21 @@ export const Footer: React.FC = () => {
                 border: 'none',
                 cursor: 'pointer',
                 padding: 0,
+                textDecoration: 'none',
                 transition: 'color var(--transition-fast)',
               }}
               onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text-primary)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-muted)'; }}
             >
               PRIVACY POLICY
-            </button>
+            </a>
             <span style={{ color: 'var(--border-subtle)', fontSize: '11px' }}>/</span>
-            <button
-              onClick={() => setLegalModal({ open: true, type: 'terms' })}
+            <a
+              href="/terms"
+              onClick={(e) => {
+                e.preventDefault();
+                handleOpenLegal('terms');
+              }}
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '11px',
@@ -305,13 +369,14 @@ export const Footer: React.FC = () => {
                 border: 'none',
                 cursor: 'pointer',
                 padding: 0,
+                textDecoration: 'none',
                 transition: 'color var(--transition-fast)',
               }}
               onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text-primary)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-muted)'; }}
             >
               TERMS OF ENGAGEMENT
-            </button>
+            </a>
           </div>
 
           {/* FINAL CLOSING LINE */}
@@ -320,13 +385,13 @@ export const Footer: React.FC = () => {
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '11px',
-                letterSpacing: '0.18em',
+                letterSpacing: '0.14em',
                 textTransform: 'uppercase',
                 color: 'var(--brand-accent)',
                 fontWeight: 600,
               }}
             >
-              ENGINEERED WITH PRECISION.
+              THOUGHTFUL ENGINEERING // SOFTWARE BUILT WITH PURPOSE.
             </span>
           </div>
         </div>
@@ -336,7 +401,7 @@ export const Footer: React.FC = () => {
       <LegalModal
         isOpen={legalModal.open}
         type={legalModal.type}
-        onClose={() => setLegalModal((prev) => ({ ...prev, open: false }))}
+        onClose={handleCloseLegal}
       />
 
       <style>{`

@@ -1,0 +1,41 @@
+# BuiltCodeHouse (BuiltCode House)
+
+> BuiltCodeHouse is a digital engineering studio based in Ahmedabad, Gujarat, India, building custom software, web applications and SaaS products for businesses.
+
+Thoughtful engineering. Clear ownership. Software built with purpose.
+
+BuiltCodeHouse (also recognized as BuiltCode House) is a software development and digital engineering studio based in Ahmedabad, India. We build custom software, web applications, and SaaS platforms for businesses locally and globally, combining disciplined systems architecture, direct senior engineer collaboration, and unencumbered code ownership.
+
+## Studio Identity & Location
+- Official Company Name: BuiltCodeHouse
+- Alternate Brand Names: BuiltCode House, BuiltCodeHouse India, BuiltCode House Ahmedabad
+- Studio Location: Ahmedabad, Gujarat, India
+- Founder & Principal Architect: Dixit Sharma
+- Canonical Website: https://builtcodehouse.com
+- Primary Ingestion Email: contact@builtcodehouse.com
+- Timezone: Indian Standard Time (IST / UTC+5:30) with structured overlapping collaboration windows for global clients.
+
+## Core Engineering Services
+- [Custom Software Development](https://builtcodehouse.com/services/custom-software-development): End-to-end custom software and enterprise web applications engineered to ship fast and scale reliably.
+- [Web Application Development](https://builtcodehouse.com/services/web-development): High-performance responsive web applications built with modern frontend frameworks and robust APIs.
+- [SaaS Product Development](https://builtcodehouse.com/services/saas-development): Multi-tenant subscription platforms engineered with secure billing, tenant isolation, and enterprise user management.
+- [Practical AI & Automated Workflows](https://builtcodehouse.com/services/ai-development): Deterministic LLM pipelines, retrieval-augmented generation (RAG), and autonomous workflows that eliminate operational bottlenecks.
+- [Enterprise Software Modernization](https://builtcodehouse.com/services): Mission-critical internal systems, legacy decoupling, and cloud-native architecture.
+- [Cloud Infrastructure & DevOps](https://builtcodehouse.com/services): Automated CI/CD pipelines, container orchestration, zero-downtime deployments, and 99.9%+ availability.
+
+## Engineering Architecture & Case Studies
+- [Horizon SaaS](https://builtcodehouse.com/work): Multi-tenant enterprise analytics platform engineered for sub-50ms query latencies.
+- [Pulse AI](https://builtcodehouse.com/work): Autonomous customer intelligence engine featuring deterministic LLM retrieval pipelines.
+- [Apex Financial](https://builtcodehouse.com/work): High-throughput fintech ledger processing with ACID compliance and zero data loss.
+- [Beacon IoT](https://builtcodehouse.com/work): Distributed edge fleet telemetry streaming data from 50,000+ connected edge nodes.
+
+## Engineering Publications & Research
+- [Deterministic AI Systems in High-Stakes Environments](https://builtcodehouse.com/insights): Architectural patterns for eliminating nondeterminism in enterprise LLM workflows.
+- [Zero-Downtime Database Migrations at Enterprise Scale](https://builtcodehouse.com/insights): Blue-green schemas and dual-write patterns for high-throughput databases.
+- [Multi-Tenant Microservices for Global Latency SLAs](https://builtcodehouse.com/insights): Edge-routing and regional partitioning for distributed APIs.
+
+## Direct Ingestion & Legal Policies
+- [About BuiltCodeHouse](https://builtcodehouse.com/about)
+- [Initiate Technical Discovery](https://builtcodehouse.com/contact)
+- [Privacy Policy](https://builtcodehouse.com/privacy)
+- [Terms of Service](https://builtcodehouse.com/terms)
